@@ -14,8 +14,14 @@ datasource db {
 }
 
 model User {
-  id          String  @id @default(uuid())
-  username    String  @unique
-  email       String  @unique
-  description String? @db.VarChar(500)
+  id          String   @id @default(uuid())
+  username    String   @unique
+  email       String   @unique
+  description String?  @db.VarChar(500)
+  type        UserType @default(NORMAL)
+}
+
+enum UserType {
+  ADMIN
+  NORMAL
 }
