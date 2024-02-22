@@ -1,5 +1,5 @@
 import $axios from '@/lib/axios'
-import type { AxiosInstance } from 'axios'
+import type { AxiosError, AxiosInstance } from 'axios'
 import type HttpClient from '../http-client'
 import { setDataResponse, setErrorResponse } from '@/infra/utils/response-handler'
 
@@ -14,7 +14,7 @@ export default class AxiosAdapter implements HttpClient {
       return setDataResponse<T>(data)
     } catch (error) {
       console.log(error)
-      return setErrorResponse(error as Error)
+      return setErrorResponse(error as AxiosError)
     }
   }
 
@@ -23,7 +23,7 @@ export default class AxiosAdapter implements HttpClient {
       const { data } = await this._client.put<T>(this.constructUrl(url), body)
       return setDataResponse<T>(data)
     } catch (error) {
-      return setErrorResponse(error as Error)
+      return setErrorResponse(error as AxiosError)
     }
   }
 

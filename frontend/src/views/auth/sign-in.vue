@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button'
 import { RouterLink, useRouter } from 'vue-router'
 import { useNotify } from '@/plugins/toast-notify'
 import { Separator } from '@/components/ui/separator'
+import HeaderLogin from '@/components/header-login.vue'
 import InputPassword from '@/components/input-password.vue'
 
 const $router = useRouter()
@@ -31,7 +32,8 @@ const signIn = async () => {
 </script>
 
 <template>
-  <div class="flex flex-col items-center justify-center gap-9 h-screen">
+  <header-login />
+  <div class="flex flex-col items-center justify-center gap-9 py-14">
     <form class="w-[30%]" @submit.prevent.stop="signIn">
       <h1 class="text-3xl font-bold mb-5">Login</h1>
 
