@@ -1,0 +1,11 @@
+version: '3.9'
+
+services:
+  database:
+    image: postgres
+    environment:
+      - POSTGRES_USER=docker
+      - POSTGRES_PASSWORD=docker
+      - POSTGRES_DB=tabnews
+    ports:
+      - 5440:5432
