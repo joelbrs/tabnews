@@ -2,7 +2,7 @@ import type { CreateAxiosDefaults } from 'axios'
 import axios from 'axios'
 
 const options: CreateAxiosDefaults = {
-  baseURL: import.meta.env.API_BASE_URL,
+  baseURL: import.meta.env.VITE_API_BASE_URL,
   withCredentials: true,
   headers: {
     'Content-Type': 'application/json',
