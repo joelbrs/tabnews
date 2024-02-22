@@ -34,7 +34,7 @@ const signUp = async () => {
 </script>
 
 <template>
-  <div class="flex flex-col items-center justify-center gap-10 py-14">
+  <div class="flex flex-col items-center justify-center gap-10 pt-14">
     <form class="w-[30%]" @submit.prevent.stop="signUp">
       <h1 class="text-3xl font-bold mb-5">Cadastro</h1>
 
@@ -71,26 +71,5 @@ const signUp = async () => {
         Criar cadastro
       </Button>
     </form>
-
-    <Separator class="w-[30%]" />
-
-    <footer class="flex flex-col gap-5 text-sm text-center w-[25%]">
-      <div class="flex flex-wrap justify-center items-center gap-5 px-5">
-        <RouterLink class="text-blue-600" :to="{ name: 'sign-in' }">Contato</RouterLink>
-        <RouterLink class="text-blue-600" :to="{ name: 'sign-in' }">FAQ</RouterLink>
-        <RouterLink class="text-blue-600" :to="{ name: 'sign-in' }">GitHub</RouterLink>
-        <RouterLink class="text-blue-600" :to="{ name: 'sign-in' }">Museu</RouterLink>
-        <RouterLink class="text-blue-600" :to="{ name: 'sign-in' }">RSS</RouterLink>
-        <RouterLink class="text-blue-600" :to="{ name: 'sign-in' }">Sobre</RouterLink>
-        <RouterLink class="text-blue-600" :to="{ name: 'sign-in' }">Status</RouterLink>
-        <RouterLink class="text-blue-600" :to="{ name: 'sign-in' }">Termos de Uso</RouterLink>
-      </div>
-
-      <div class="flex items-center justify-center gap-2 text-gray-500">
-        <img src="../../assets/logo.svg" />
-        ©
-        {{ new Date().getFullYear() }} TabNews
-      </div>
-    </footer>
   </div>
 </template>
