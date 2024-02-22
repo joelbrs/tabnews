@@ -6,6 +6,7 @@ import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { RouterLink, useRouter } from 'vue-router'
 import { useNotify } from '@/plugins/toast-notify'
+import { Checkbox } from '@/components/ui/checkbox'
 import { Separator } from '@/components/ui/separator'
 import InputPassword from '@/components/input-password.vue'
 
@@ -16,7 +17,8 @@ const loading = ref(false)
 const form = ref({
   username: '',
   email: '',
-  password: ''
+  password: '',
+  accept: false
 })
 
 const signUp = async () => {
@@ -50,11 +52,21 @@ const signUp = async () => {
         <Label for="password">Senha</Label>
         <InputPassword id="password" v-model:model-value="form.password" required />
       </div>
+
+      <div class="flex items-center gap-2 mt-5 mb-2">
+        <Checkbox v-model:checked="form.accept" />
+        <Label
+          >Li e estou de acordo com os
+          <RouterLink class="text-blue-600" :to="{ name: 'sign-in' }"
+            >Termos de Uso.</RouterLink
+          ></Label
+        >
+      </div>
       <Button
         type="submit"
         class="w-full mt-3 bg-green-700 hover:bg-green-800 text-white"
         :loading="loading"
-        :disabled="loading"
+        :disabled="!form.accept || loading"
       >
         Criar cadastro
       </Button>
