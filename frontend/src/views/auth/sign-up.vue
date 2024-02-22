@@ -14,14 +14,13 @@ const $notify = useNotify()
 
 const loading = ref(false)
 const form = ref({
-  username: '',
   email: '',
   password: ''
 })
 
-const signUp = async () => {
+const signIn = async () => {
   loading.value = true
-  const { error } = await UsersApi.signUp(form.value)
+  const { error } = await UsersApi.signIn(form.value)
   loading.value = false
 
   if (error) return $notify.error(error)
@@ -32,14 +31,9 @@ const signUp = async () => {
 </script>
 
 <template>
-  <div class="flex flex-col items-center justify-center gap-10 py-14">
-    <form class="w-[30%]" @submit.prevent.stop="signUp">
-      <h1 class="text-3xl font-bold mb-5">Cadastro</h1>
-
-      <div>
-        <Label for="username">Nome de usuário</Label>
-        <Input id="username" v-model:model-value="form.username" required />
-      </div>
+  <div class="flex flex-col items-center justify-center gap-9 py-14">
+    <form class="w-[30%]" @submit.prevent.stop="signIn">
+      <h1 class="text-3xl font-bold mb-5">Login</h1>
 
       <div>
         <Label for="email">E-mail</Label>
@@ -56,9 +50,22 @@ const signUp = async () => {
         :loading="loading"
         :disabled="loading"
       >
-        Criar cadastro
+        Login
       </Button>
     </form>
+
+    <div class="text-center text-sm">
+      <p>
+        Novo no TabNews?
+        <RouterLink class="text-blue-600" :to="{ name: 'sign-in' }"
+          >Crie sua conta aqui.</RouterLink
+        >
+      </p>
+      <p>
+        Esqueceu sua senha?
+        <RouterLink class="text-blue-600" :to="{ name: 'sign-in' }">Clique aqui.</RouterLink>
+      </p>
+    </div>
 
     <Separator class="w-[30%]" />
 

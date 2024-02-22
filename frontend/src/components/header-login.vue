@@ -25,7 +25,7 @@ import ThemeToggle from './theme/theme-toggle.vue'
           <RouterLink :to="{ name: 'sign-in' }">Login</RouterLink>
         </div>
         <div>
-          <RouterLink :to="{ name: 'sign-in' }">Cadastrar</RouterLink>
+          <RouterLink :to="{ name: 'sign-up' }">Cadastrar</RouterLink>
         </div>
       </div>
     </div>

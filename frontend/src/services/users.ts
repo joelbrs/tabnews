@@ -6,3 +6,7 @@ const httpClient = HttpFactory(base)
 export function signIn(params: Object) {
   return httpClient.post('auth', params)
 }
+
+export function signUp(params: Object) {
+  return httpClient.post('', params)
+}
