@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import { Moon, Sun } from 'lucide-vue-next'
+import { toggleTheme } from '@/plugins/theme-provider'
+import { computed } from 'vue'
 
 type Props = {
   type?: 1 | 2
@@ -11,9 +13,8 @@ withDefaults(defineProps<Props>(), {
 </script>
 
 <template>
-  <div class="hover:cursor-pointer" v-if="type === 1">
-    <!-- <Moon class="w-4 h-4" /> -->
-    <Sun class="w-4 h-4 sun" />
+  <div v-if="type === 1" class="hover:cursor-pointer">
+    <Moon @click="toggleTheme('toggle')" class="w-4 h-4" />
   </div>
 </template>
 

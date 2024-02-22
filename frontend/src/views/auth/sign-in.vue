@@ -48,7 +48,7 @@ const signIn = async () => {
       </div>
       <Button
         type="submit"
-        class="w-full mt-3 bg-green-700 hover:bg-green-800"
+        class="w-full mt-3 bg-green-700 hover:bg-green-800 text-white"
         :loading="loading"
         :disabled="loading"
       >
