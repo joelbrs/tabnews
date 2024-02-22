@@ -7,4 +7,8 @@ export const UserRoutes = async (app: FastifyInstance) => {
   app.post("/", async (request, reply) => {
     return await factory.create(request, reply);
   });
+
+  app.post("/auth", async (request, reply) => {
+    return await factory.authenticate(request, reply);
+  });
 };

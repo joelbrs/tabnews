@@ -5,7 +5,12 @@ export default class UserController {
   constructor(private readonly _userService: UserService) {}
 
   async create(request: FastifyRequest, reply: FastifyReply) {
-    const user = await this._userService.create(request);
-    return reply.status(201).send(user);
+    await this._userService.create(request);
+    return reply.status(201).send();
+  }
+
+  async authenticate(request: FastifyRequest, reply: FastifyReply) {
+    await this._userService.authenticate(request, reply);
+    return reply.send(200).send();
   }
 }

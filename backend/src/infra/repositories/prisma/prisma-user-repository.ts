@@ -1,4 +1,4 @@
-import { Prisma, PrismaClient } from "@prisma/client";
+import { $Enums, Prisma, PrismaClient } from "@prisma/client";
 import UserRepository from "../user-repository";
 
 export default class PrismaUserRepository implements UserRepository {
@@ -6,5 +6,9 @@ export default class PrismaUserRepository implements UserRepository {
 
   async create(data: Prisma.UserCreateInput) {
     return await this._client.user.create({ data });
+  }
+
+  async findByEmail(email: string) {
+    return await this._client.user.findUnique({ where: { email } });
   }
 }

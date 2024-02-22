@@ -18,10 +18,11 @@ model User {
   username    String   @unique
   email       String   @unique
   description String?  @db.VarChar(500)
-  type        UserType @default(NORMAL)
+  password    String
+  type        UserType @default(MEMBER)
 }
 
 enum UserType {
   ADMIN
-  NORMAL
+  MEMBER
 }
