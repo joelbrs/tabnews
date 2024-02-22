@@ -22,6 +22,23 @@ export default class UserService {
     });
   }
 
+  async update(request: FastifyRequest) {
+    const dataValidSchema = z.object({
+      username: z.string(),
+      description: z.string(),
+    });
+
+    const { id } = request.params as { id: string };
+
+    const data = dataValidSchema.parse(request.body);
+    const { username, description } = await this._userRepository.update(
+      id,
+      data
+    );
+
+    return { username, description };
+  }
+
   async authenticate(request: FastifyRequest, reply: FastifyReply) {
     const authBodySchema = z.object({
       email: z.string().email(),

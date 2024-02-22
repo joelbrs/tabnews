@@ -9,6 +9,11 @@ export default class UserController {
     return reply.status(201).send();
   }
 
+  async update(request: FastifyRequest, reply: FastifyReply) {
+    const user = await this._userService.update(request);
+    return reply.status(200).send(user);
+  }
+
   async authenticate(request: FastifyRequest, reply: FastifyReply) {
     await this._userService.authenticate(request, reply);
     return reply.send(200).send();
