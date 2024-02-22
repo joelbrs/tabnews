@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { Moon, Sun } from 'lucide-vue-next'
-import { toggleTheme } from '@/plugins/theme-provider'
-import { computed } from 'vue'
+import { toggleTheme, verifyThemeSystem } from '@/plugins/theme-provider'
+import { computed, onMounted } from 'vue'
 
 type Props = {
   type?: 1 | 2
@@ -9,6 +9,10 @@ type Props = {
 
 withDefaults(defineProps<Props>(), {
   type: 1
+})
+
+onMounted(() => {
+  verifyThemeSystem()
 })
 </script>
 

@@ -6,7 +6,6 @@ import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { RouterLink, useRouter } from 'vue-router'
 import { useNotify } from '@/plugins/toast-notify'
-import { Checkbox } from '@/components/ui/checkbox'
 import { Separator } from '@/components/ui/separator'
 import InputPassword from '@/components/input-password.vue'
 
@@ -15,15 +14,13 @@ const $notify = useNotify()
 
 const loading = ref(false)
 const form = ref({
-  username: '',
   email: '',
-  password: '',
-  accept: false
+  password: ''
 })
 
-const signUp = async () => {
+const signIn = async () => {
   loading.value = true
-  const { error } = await UsersApi.signUp(form.value)
+  const { error } = await UsersApi.signIn(form.value)
   loading.value = false
 
   if (error) return $notify.error(error)
@@ -34,14 +31,9 @@ const signUp = async () => {
 </script>
 
 <template>
-  <div class="flex flex-col items-center justify-center gap-10 py-14">
-    <form class="w-[30%]" @submit.prevent.stop="signUp">
-      <h1 class="text-3xl font-bold mb-5">Cadastro</h1>
-
-      <div>
-        <Label for="username">Nome de usuário</Label>
-        <Input id="username" v-model:model-value="form.username" required />
-      </div>
+  <div class="flex flex-col items-center justify-center gap-9 py-14">
+    <form class="w-[30%]" @submit.prevent.stop="signIn">
+      <h1 class="text-3xl font-bold mb-5">Login</h1>
 
       <div>
         <Label for="email">E-mail</Label>
@@ -52,25 +44,28 @@ const signUp = async () => {
         <Label for="password">Senha</Label>
         <InputPassword id="password" v-model:model-value="form.password" required />
       </div>
-
-      <div class="flex items-center gap-2 mt-5 mb-2">
-        <Checkbox v-model:checked="form.accept" />
-        <Label
-          >Li e estou de acordo com os
-          <RouterLink class="text-blue-600" :to="{ name: 'sign-in' }"
-            >Termos de Uso.</RouterLink
-          ></Label
-        >
-      </div>
       <Button
         type="submit"
         class="w-full mt-3 bg-green-700 hover:bg-green-800 text-white"
         :loading="loading"
-        :disabled="!form.accept || loading"
+        :disabled="loading"
       >
-        Criar cadastro
+        Login
       </Button>
     </form>
+
+    <div class="text-center text-sm">
+      <p>
+        Novo no TabNews?
+        <RouterLink class="text-blue-600" :to="{ name: 'sign-in' }"
+          >Crie sua conta aqui.</RouterLink
+        >
+      </p>
+      <p>
+        Esqueceu sua senha?
+        <RouterLink class="text-blue-600" :to="{ name: 'sign-in' }">Clique aqui.</RouterLink>
+      </p>
+    </div>
 
     <Separator class="w-[30%]" />
 
