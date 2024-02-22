@@ -23,6 +23,7 @@ $axios.interceptors.response.use(
     if (error.response.status === 401) {
       window.location.href = ''
     }
+    return Promise.reject(error)
   }
 )
 

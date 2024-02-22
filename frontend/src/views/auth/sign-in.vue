@@ -23,7 +23,7 @@ const signIn = async () => {
   const { error } = await UsersApi.signIn(form.value)
   loading.value = false
 
-  if (error) return $notify.error('Erro ao fazer login.')
+  if (error) return $notify.error(error)
 
   $notify.ok()
   await $router.push({ name: 'sign-in' })
@@ -44,7 +44,14 @@ const signIn = async () => {
         <Label for="password">Senha</Label>
         <InputPassword id="password" v-model:model-value="form.password" required />
       </div>
-      <Button type="submit" class="w-full mt-3 bg-green-700 hover:bg-green-800">Login</Button>
+      <Button
+        type="submit"
+        class="w-full mt-3 bg-green-700 hover:bg-green-800"
+        :loading="loading"
+        :disabled="loading"
+      >
+        Login
+      </Button>
     </form>
 
     <div class="text-center text-sm">
