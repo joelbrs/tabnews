@@ -21,7 +21,11 @@ import MenuUser from './menu-user.vue'
       <div class="flex items-center gap-3 md:gap-5">
         <InputSearch label="Pesquisar" />
 
-        <div class="hidden md:flex" title="Publicar novo conteúdo">
+        <div
+          @click="$router.push({ name: 'publish' })"
+          class="hidden md:flex"
+          title="Publicar novo conteúdo"
+        >
           <Plus class="w-5 h-5 hover:cursor-pointer" />
         </div>
 

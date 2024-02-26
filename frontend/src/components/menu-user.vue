@@ -33,7 +33,7 @@ const user = computed(() => {
       </div>
       <DropdownMenuSeparator />
       <DropdownMenuGroup>
-        <DropdownMenuItem class="hover:cursor-pointer">
+        <DropdownMenuItem @click="$router.push({ name: 'publish' })" class="hover:cursor-pointer">
           <Plus class="w-4 h-4 mr-1 text-gray-500" />
           <span>Novo conteúdo</span>
         </DropdownMenuItem>
