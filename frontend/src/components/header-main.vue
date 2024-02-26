@@ -19,7 +19,7 @@ import MenuUser from './menu-user.vue'
         <div>Recentes</div>
       </nav>
       <div class="flex items-center gap-3 lg:gap-5">
-        <InputSearch class="hidden lg:flex" label="Pesquisar" />
+        <InputSearch label="Pesquisar" />
 
         <div class="hidden lg:flex" title="Publicar novo conteúdo">
           <Plus class="w-5 h-5 hover:cursor-pointer" />

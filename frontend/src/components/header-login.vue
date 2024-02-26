@@ -9,8 +9,8 @@ import ThemeToggle from './theme/theme-toggle.vue'
       <nav class="flex items-center gap-5">
         <div class="flex items-center gap-2 hover:cursor-pointer hover:text-zinc-400">
           <img class="w-9 h-9" src="../assets/logo-white.svg" />
-          <div class="flex gap-5">
-            <h3>TabNews</h3>
+          <div class="flex items-center gap-5">
+            <h3 class="hidden lg:flex">TabNews</h3>
             <div>Relevantes</div>
           </div>
         </div>
@@ -19,12 +19,17 @@ import ThemeToggle from './theme/theme-toggle.vue'
       </nav>
       <div class="flex items-center gap-5">
         <InputSearch label="Pesquisar" />
+
         <ThemeToggle />
 
-        <div>
+        <div class="lg:hidden">
+          <RouterLink :to="{ name: 'sign-in' }">Entrar</RouterLink>
+        </div>
+
+        <div class="hidden lg:flex">
           <RouterLink :to="{ name: 'sign-in' }">Login</RouterLink>
         </div>
-        <div>
+        <div class="hidden lg:flex">
           <RouterLink :to="{ name: 'sign-up' }">Cadastrar</RouterLink>
         </div>
       </div>

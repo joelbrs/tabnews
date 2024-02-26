@@ -29,11 +29,12 @@ watch(
 
 <template>
   <div class="flex items-center justify-center">
-    <div class="flex relative left-24 gap-2 items-center text-zinc-400">
+    <Search class="w-4 h-4 lg:hidden" />
+    <div class="lg:flex relative left-24 gap-2 items-center text-zinc-400 hidden">
       <Search class="w-4 h-4" />
       <Label>{{ label }}</Label>
     </div>
-    <div class="w-full">
+    <div class="w-full hidden lg:flex">
       <Input
         @click.prevent.stop="$emit('search')"
         :id="id"

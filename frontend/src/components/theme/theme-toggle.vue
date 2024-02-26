@@ -21,7 +21,8 @@ onMounted(() => {
 
 <template>
   <div v-if="type === 1" class="hover:cursor-pointer">
-    <Moon @click="toggleTheme('toggle')" class="w-4 h-4" />
+    <Moon v-if="theme !== 'dark'" @click="theme = toggleTheme('dark')" class="w-4 h-4" />
+    <Sun v-else @click="theme = toggleTheme('light')" class="w-4 h-4 sun" />
   </div>
   <div class="w-full flex items-center justify-center" v-else>
     <Tabs v-model:model-value="theme" default-value="auto">
