@@ -29,18 +29,17 @@ watch(
 
 <template>
   <div class="flex items-center justify-center">
-    <Search class="w-4 h-4 lg:hidden" />
-    <div class="lg:flex relative left-24 gap-2 items-center text-zinc-400 hidden">
+    <Search class="w-4 h-4 md:hidden" />
+    <div class="md:flex relative left-24 gap-2 items-center text-zinc-400 hidden">
       <Search class="w-4 h-4" />
       <Label>{{ label }}</Label>
     </div>
-    <div class="w-full hidden lg:flex">
+    <div class="w-full hidden md:flex">
       <Input
         @click.prevent.stop="$emit('search')"
         :id="id"
         :required="required"
-        class="h-8"
-        style="background-color: #24292f"
+        class="h-8 z-10 bg-transparent"
         v-model:model-value="search"
       />
     </div>
