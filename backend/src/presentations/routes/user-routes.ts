@@ -5,6 +5,10 @@ import { VerifyJwt } from "../../infra/middlewares/verify-jwt";
 const factory = UserFactory();
 
 export const UserRoutes = async (app: FastifyInstance) => {
+  app.get("/logged", { onRequest: VerifyJwt }, async (request, reply) => {
+    return await factory.getLoggedUser(request, reply);
+  });
+
   app.post("/", async (request, reply) => {
     return await factory.create(request, reply);
   });
