@@ -3,9 +3,39 @@ import { FastifyReply, FastifyRequest } from "fastify";
 import UserRepository from "../../infra/repositories/user-repository";
 import { generateHash } from "../../infra/utils/hashs/generate-hash";
 import { compare } from "../../infra/utils/hashs/compare-hash";
+import { Prisma } from "@prisma/client";
+
+interface LoggedUser {
+  id: string;
+  username: string;
+  email: string;
+  description: string | null;
+  createdAt: Date;
+}
 
 export default class UserService {
   constructor(private readonly _userRepository: UserRepository) {}
+
+  async getLoggedUser(request: FastifyRequest): Promise<LoggedUser> {
+    const { sub: id }: { sub: string } = await request.jwtVerify();
+
+    if (!id) {
+      throw new Error("User does'n exists.");
+    }
+    const data = await this._userRepository.findById(id);
+
+    if (!data) {
+      throw new Error("User does'n exists.");
+    }
+
+    return {
+      id: data.id,
+      username: data.username,
+      email: data.email,
+      description: data.description,
+      createdAt: data.created_at,
+    };
+  }
 
   async create(request: FastifyRequest) {
     const dataValidSchema = z.object({
@@ -74,6 +104,7 @@ export default class UserService {
         httpOnly: true,
         maxAge: 86400 * 7,
         path: "/",
+        sameSite: true,
       });
     } catch (err) {
       throw err;
