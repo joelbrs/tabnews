@@ -11,7 +11,9 @@ import {
 import ThemeToggle from './theme/theme-toggle.vue'
 import { computed } from 'vue'
 import { useUserStore } from '@/stores/user'
+import { useRouter } from 'vue-router'
 
+const $router = useRouter()
 const $userStore = useUserStore()
 
 const user = computed(() => {
@@ -39,7 +41,7 @@ const user = computed(() => {
           <List class="w-4 h-4 mr-1 text-gray-500" />
           <span>Meus conteúdos</span>
         </DropdownMenuItem>
-        <DropdownMenuItem class="hover:cursor-pointer">
+        <DropdownMenuItem @click="$router.push({ name: 'profile' })" class="hover:cursor-pointer">
           <Settings class="w-4 h-4 mr-1 text-gray-500" />
           <span>Editar perfil</span>
         </DropdownMenuItem>

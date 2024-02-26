@@ -5,10 +5,10 @@ import { Separator } from '@/components/ui/separator'
 
 <template>
   <div class="flex flex-col justify-center items-center">
-    <Separator class="w-[30%] mb-8" />
+    <Separator class="w-[44%] mb-8" />
 
-    <footer class="flex flex-col justify-center gap-5 text-sm text-center px-10 lg:w-[23%]">
-      <div class="flex flex-wrap justify-center items-center gap-5">
+    <footer class="flex flex-col justify-center gap-5 text-sm text-center px-10">
+      <div class="flex flex-wrap justify-center items-center gap-10">
         <RouterLink class="text-blue-600" :to="{ name: 'sign-in' }">Contato</RouterLink>
         <RouterLink class="text-blue-600" :to="{ name: 'sign-in' }">FAQ</RouterLink>
         <RouterLink class="text-blue-600" :to="{ name: 'sign-in' }">GitHub</RouterLink>
