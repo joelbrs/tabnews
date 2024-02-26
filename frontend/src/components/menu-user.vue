@@ -9,6 +9,14 @@ import {
   DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu'
 import ThemeToggle from './theme/theme-toggle.vue'
+import { computed } from 'vue'
+import { useUserStore } from '@/stores/user'
+
+const $userStore = useUserStore()
+
+const user = computed(() => {
+  return $userStore.user
+})
 </script>
 
 <template>
@@ -19,7 +27,7 @@ import ThemeToggle from './theme/theme-toggle.vue'
     <DropdownMenuContent class="w-48 rounded-xl relative right-3">
       <div class="flex items-center justify-start gap-1 px-3 py-2">
         <User class="mr-2 h-4 w-4 text-gray-500" />
-        <span class="text-sm">joelf</span>
+        <span class="text-sm">{{ user?.username }}</span>
       </div>
       <DropdownMenuSeparator />
       <DropdownMenuGroup>
