@@ -6,7 +6,7 @@ const $emits = defineEmits<{
 }>()
 
 defineProps<{
-  modelValue?: string
+  disabled?: boolean
 }>()
 
 const quill = ref('')

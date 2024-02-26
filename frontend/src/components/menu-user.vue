@@ -27,7 +27,12 @@ const user = computed(() => {
       <Menu class="w-7 h-7 hover:cursor-pointer" />
     </DropdownMenuTrigger>
     <DropdownMenuContent class="w-48 rounded-xl relative right-3">
-      <div class="flex items-center justify-start gap-1 px-3 py-2">
+      <div
+        @click="
+          $router.push({ name: 'user-general-profile', params: { username: user?.username } })
+        "
+        class="flex items-center justify-start gap-1 px-3 py-2"
+      >
         <User class="mr-2 h-4 w-4 text-gray-500" />
         <span class="text-sm">{{ user?.username }}</span>
       </div>
@@ -37,7 +42,10 @@ const user = computed(() => {
           <Plus class="w-4 h-4 mr-1 text-gray-500" />
           <span>Novo conteúdo</span>
         </DropdownMenuItem>
-        <DropdownMenuItem class="hover:cursor-pointer">
+        <DropdownMenuItem
+          @click="$router.push({ name: 'user-contents', params: { username: user?.username } })"
+          class="hover:cursor-pointer"
+        >
           <List class="w-4 h-4 mr-1 text-gray-500" />
           <span>Meus conteúdos</span>
         </DropdownMenuItem>

@@ -16,7 +16,22 @@ const router = createRouter({
         {
           path: '/profile',
           name: 'profile',
-          component: () => import('../views/app/profile/index-page.vue')
+          component: () => import('../views/app/user/user-profile.vue')
+        },
+        {
+          path: '/:username',
+          name: 'user-general-profile',
+          component: () => import('../views/app/user/index-page.vue')
+        },
+        {
+          path: '/:username/publishes',
+          name: 'user-contents',
+          component: () => import('../views/app/user/index-page.vue')
+        },
+        {
+          path: '/:username/comments',
+          name: 'user-comments',
+          component: () => import('../views/app/user/index-page.vue')
         },
         {
           path: '/publish',
