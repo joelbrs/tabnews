@@ -32,7 +32,7 @@ const signIn = async () => {
 
 <template>
   <div class="flex flex-col items-center justify-center gap-9 py-14">
-    <form class="w-[30%]" @submit.prevent.stop="signIn">
+    <form class="w-full p-2 lg:w-[30%]" @submit.prevent.stop="signIn">
       <h1 class="text-3xl font-bold mb-5">Login</h1>
 
       <div>
