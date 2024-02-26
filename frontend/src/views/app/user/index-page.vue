@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, nextTick, onMounted, ref } from 'vue'
+import { computed, watch, onMounted, ref } from 'vue'
 import { useUserStore } from '@/stores/user'
 import { Settings } from 'lucide-vue-next'
 import MenuActions from '@/components/menu-actions.vue'
@@ -13,20 +13,24 @@ import { useRoute } from 'vue-router'
 const $route = useRoute()
 const $userStore = useUserStore()
 
+const key = ref(0)
 const tab = ref('profile')
 
 const tabs: Tab[] = [
   {
     id: 'profile',
-    label: 'Perfil'
+    label: 'Perfil',
+    to: 'user-general-profile'
   },
   {
     id: 'publishes',
-    label: 'Publicações'
+    label: 'Publicações',
+    to: 'user-contents'
   },
   {
     id: 'comments',
-    label: 'Comentários'
+    label: 'Comentários',
+    to: 'user-comments'
   }
 ]
 
@@ -36,7 +40,7 @@ onMounted(async () => {
   const [_, __, param] = $route.path.split('/')
   tab.value = param || 'profile'
 
-  await nextTick()
+  key.value++
 })
 </script>
 
@@ -53,7 +57,7 @@ onMounted(async () => {
       </MenuActions>
     </div>
 
-    <Tabs v-model:model-value="tab" :tabs="tabs">
+    <Tabs :key="key" v-model:model-value="tab" :tabs="tabs">
       <template #header-profile>
         <HeaderProfileTab />
       </template>

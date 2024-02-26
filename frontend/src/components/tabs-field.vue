@@ -8,6 +8,7 @@ export interface Tab {
   label: string
   title?: string
   description?: string
+  to?: string
 }
 
 const $emits = defineEmits<{
@@ -33,7 +34,14 @@ watch(
 <template>
   <Tabs v-model:model-value="currentTab" :default-value="tabs[0].id" class="w-[44%]">
     <TabsList class="grid w-full grid-cols-3">
-      <TabsTrigger v-for="tab in tabs" :key="tab.id" :value="tab.id"> {{ tab.label }} </TabsTrigger>
+      <TabsTrigger
+        @click="$router.push({ name: tab.to })"
+        v-for="tab in tabs"
+        :key="tab.id"
+        :value="tab.id"
+      >
+        {{ tab.label }}
+      </TabsTrigger>
     </TabsList>
     <TabsContent v-for="tab in tabs" :key="tab.id" :value="tab.id">
       <Card>

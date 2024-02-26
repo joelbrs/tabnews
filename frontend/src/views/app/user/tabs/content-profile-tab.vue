@@ -39,9 +39,7 @@ onMounted(() => {
     </div>
 
     <div v-else>
-      <Button @click.prevent.stop="showQuill = true" class="h-8" variant="secondary">
-        Criar Descrição
-      </Button>
+      <Button @click.prevent.stop="showQuill = true" class="h-8"> Criar Descrição </Button>
     </div>
   </div>
 </template>
