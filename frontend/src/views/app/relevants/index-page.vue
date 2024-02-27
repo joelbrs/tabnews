@@ -1,3 +1,7 @@
+<script setup lang="ts">
+import PublishesPage from '@/components/publishes-page.vue'
+</script>
+
 <template>
-  <h1>Relevantes</h1>
+  <PublishesPage type="all" />
 </template>

@@ -80,31 +80,35 @@ onMounted(async () => {
 
 <template>
   <div v-if="loading">
-    <PublishesPageSkeleton />
+    <PublishesPageSkeleton :type="type" />
   </div>
   <div v-else>
-    <div class="pt-7" v-if="publishs && publishs.length">
-      <div
-        v-for="(item, i) in publishs"
-        :key="item.id"
-        class="flex items-start justify-start gap-2 py-1"
-      >
-        <span>{{ i + 1 }}.</span>
-        <div class="flex flex-col">
-          <RouterLink to="/" class="font-medium hover:underline">{{ item.title }}</RouterLink>
+    <div class="flex flex-col md:items-center py-4 md:py-7" v-if="publishs && publishs.length">
+      <div>
+        <div
+          v-for="(item, i) in publishs"
+          :key="item.id"
+          class="flex items-start justify-start gap-2 pb-5 md:pb-3.5 pl-5"
+        >
+          <span class="font-medium">{{ i + 1 }}.</span>
+          <div class="flex flex-wrap md:max-w-[65vw] flex-col">
+            <RouterLink to="/" class="font-medium hover:underline">{{ item.title }}</RouterLink>
 
-          <div class="flex items-center gap-1.5 text-xs text-muted-foreground">
-            <span>0 tabcoin</span>
-            <span> · </span>
-            <span>0 comentário</span>
-            <span> · </span>
-            <span>{{ user?.username }}</span>
-            <span> · </span>
-            <span>há 24 segundos</span>
+            <div class="flex items-center gap-1.5 text-xs text-muted-foreground">
+              <span>0</span>
+              <span>tabcoin</span>
+              <span> · </span>
+              <span>0</span>
+              <span>comentário</span>
+              <span> · </span>
+              <span>{{ user?.username }}</span>
+              <span> · </span>
+              <span>há 24 segundos</span>
+            </div>
           </div>
         </div>
+        <PaginationField @handle-pagination="handlePagination($event)" :pagination="pagination" />
       </div>
-      <PaginationField @handle-pagination="handlePagination($event)" :pagination="pagination" />
     </div>
     <div v-else class="flex flex-col items-center justify-center pt-5 pb-10">
       <slot name="not-found" />
