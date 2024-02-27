@@ -1,15 +1,16 @@
 <script setup lang="ts">
-import { ref, watch } from 'vue'
+import { onMounted, ref, watch } from 'vue'
 
 const $emits = defineEmits<{
-  (e: 'update:modelValue', value: string): void
+  (e: 'update:modelValue', value?: string): void
 }>()
 
-defineProps<{
+const props = defineProps<{
   disabled?: boolean
+  modelValue?: string
 }>()
 
-const quill = ref('')
+const quill = ref(props.modelValue)
 
 watch(
   () => quill.value,

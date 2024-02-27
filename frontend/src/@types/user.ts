@@ -4,4 +4,5 @@ export interface User {
   email: string
   description?: string
   createdAt: Date
+  notify: boolean
 }

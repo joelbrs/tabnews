@@ -33,6 +33,15 @@ export const useUserStore = defineStore('user', {
       if (error) return $notify.error(error)
 
       $notify.ok()
+    },
+    async updateProfile(form: Object) {
+      const { error } = await UsersApi.updateUser(form)
+
+      console.log(error)
+      if (error) return $notify.error(error)
+
+      $notify.ok()
+      await this.getLoggedUser()
     }
   }
 })

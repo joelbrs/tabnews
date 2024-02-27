@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, ref } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import { Label } from '@/components/ui/label'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
@@ -10,28 +10,31 @@ import { RouterLink } from 'vue-router'
 import InputQuillEditor from '@/components/input-quill-editor.vue'
 
 const $userStore = useUserStore()
+
+const key = ref(0)
 const loading = ref(false)
 
-const form = ref<User>({
-  createdAt: new Date(),
-  description: '',
-  email: '',
-  id: '',
-  username: ''
+const form = computed({
+  get(): User {
+    return $userStore.user || ({} as User)
+  },
+  set() {}
 })
 
-onMounted(async () => {
-  const { user } = $userStore
+const updateProfile = async () => {
+  loading.value = true
+  await $userStore.updateProfile(form.value)
+  loading.value = false
+}
 
-  if (user) {
-    form.value = { ...form.value, ...user }
-  }
+onMounted(async () => {
+  key.value++
 })
 </script>
 
 <template>
   <div class="flex flex-col items-center justify-center gap-9 pt-5">
-    <form class="w-full lg:py-2 p-2 md:w-[45%]" @submit.prevent.stop="">
+    <form class="w-full lg:py-2 p-2 md:w-[45%]" @submit.prevent.stop="updateProfile">
       <h1 class="text-3xl font-bold mb-5">Editar Perfil</h1>
 
       <div class="flex flex-col gap-2">
@@ -47,12 +50,12 @@ onMounted(async () => {
 
         <div>
           <Label>Descrição</Label>
-          <InputQuillEditor v-model:model-value="form.description" />
+          <InputQuillEditor :key="key" v-model:model-value="form.description" />
         </div>
       </div>
 
       <div class="flex items-center gap-1 py-5">
-        <Checkbox />
+        <Checkbox v-model:checked="form.notify" />
         <Label>Receber notificações por email</Label>
       </div>
 
