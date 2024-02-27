@@ -49,8 +49,8 @@ onMounted(async () => {
     <div class="flex justify-between items-center w-[44%]">
       <h1 class="text-2xl font-bold mb-2">{{ user?.username }}</h1>
 
-      <MenuActions>
-        <div @click="$router.push({ name: 'publish' })" class="flex items-center gap-1">
+      <MenuActions v-if="tab === 'profile'">
+        <div @click="$router.push({ name: 'profile' })" class="flex items-center gap-1">
           <Settings class="w-4 h-4" />
           Editar Perfil
         </div>

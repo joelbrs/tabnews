@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, ref, watch } from 'vue'
+import { ref, watch } from 'vue'
 
 const $emits = defineEmits<{
   (e: 'update:modelValue', value?: string): void
@@ -28,7 +28,8 @@ watch(
       content-type="html"
       v-model:content="quill"
       theme="snow"
-      toolbar="essential"
+      :readOnly="disabled"
+      :toolbar="!disabled ? 'essential' : ['clean']"
     />
   </div>
 </template>
