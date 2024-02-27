@@ -4,7 +4,7 @@ import ThemeToggle from './theme/theme-toggle.vue'
 </script>
 
 <template>
-  <header style="background-color: #24292f" class="p-3.5 text-white font-medium text-sm">
+  <header style="background-color: #161b22" class="p-3.5 text-white font-medium text-sm">
     <div class="flex justify-between items-center">
       <nav class="flex items-center gap-5">
         <div class="flex items-center gap-2 hover:cursor-pointer hover:text-zinc-400">

@@ -15,7 +15,21 @@ export default class PostService {
       size: number | null;
     };
 
-    return this._postRepository.getAll({
+    return await this._postRepository.getAll({
+      page: page ?? DEFAULT_PAGE,
+      size: size ?? DEFAULT_SIZE,
+    });
+  }
+
+  async getPostsByUser(request: FastifyRequest) {
+    const { page, size } = request.query as {
+      page: number | null;
+      size: number | null;
+    };
+
+    const { sub }: { sub: string } = await request.jwtVerify();
+
+    return await this._postRepository.getPostsByUser(sub, {
       page: page ?? DEFAULT_PAGE,
       size: size ?? DEFAULT_SIZE,
     });
