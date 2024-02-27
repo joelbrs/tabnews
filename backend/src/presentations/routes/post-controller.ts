@@ -9,6 +9,10 @@ export const PostRoutes = async (app: FastifyInstance) => {
     return factory.getAll(request, reply);
   });
 
+  app.get("/user", async (request, reply) => {
+    return factory.getPostsByUser(request, reply);
+  });
+
   app.post("/", { onRequest: VerifyJwt }, async (request, reply) => {
     return factory.create(request, reply);
   });
