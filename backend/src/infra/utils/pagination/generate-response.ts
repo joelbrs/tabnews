@@ -9,13 +9,13 @@ interface Params<T> extends PaginationInputModel {
 export default function generatePaginatedResponse<T>(params: Params<T>) {
   const { data, page, size, count } = params;
 
-  const totalPages = Math.ceil(count / (page ?? DEFAULT_PAGE));
+  const totalPages = Math.round(count / (size ?? DEFAULT_SIZE));
 
   return {
     content: data,
     page: Number(page) ?? DEFAULT_PAGE,
     size: Number(size) ?? DEFAULT_SIZE,
     totalElements: +count,
-    totalPages: totalPages !== Infinity ? totalPages : 1,
+    totalPages,
   };
 }
