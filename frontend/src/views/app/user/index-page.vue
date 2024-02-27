@@ -48,7 +48,7 @@ onMounted(async () => {
 
 <template>
   <div class="flex flex-col items-center pt-14 pb-3.5">
-    <div class="flex justify-between items-center w-[44%]">
+    <div class="flex justify-between items-center w-[40%]">
       <h1 class="text-2xl font-bold mb-2">{{ user?.username }}</h1>
 
       <MenuActions v-if="tab === 'profile'">
@@ -59,7 +59,7 @@ onMounted(async () => {
       </MenuActions>
     </div>
 
-    <Tabs :key="key" v-model:model-value="tab" :tabs="tabs">
+    <Tabs class="w-[30%]" :key="key" v-model:model-value="tab" :tabs="tabs">
       <template #header-profile>
         <HeaderProfileTab />
       </template>

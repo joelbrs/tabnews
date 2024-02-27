@@ -33,7 +33,7 @@ watch(
 </script>
 
 <template>
-  <Tabs v-model:model-value="currentTab" :default-value="tabs[0].id" class="w-[44%]">
+  <Tabs v-model:model-value="currentTab" :default-value="tabs[0].id" class="w-[40%]">
     <TabsList class="grid w-full grid-cols-3">
       <TabsTrigger
         @click="$router.push({ name: tab.to })"
