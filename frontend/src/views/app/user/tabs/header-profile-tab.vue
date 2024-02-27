@@ -19,6 +19,8 @@ const profile = computed(() => $userStore.user)
       <span>0</span>
       <span>TabCash</span>
     </div>
-    <span>Membro {{ $dayjs(profile?.createdAt).fromNow() }}</span>
+    <span :title="$dayjs(profile?.createdAt).format('LLL')">
+      Membro {{ $dayjs(profile?.createdAt).fromNow() }}
+    </span>
   </div>
 </template>

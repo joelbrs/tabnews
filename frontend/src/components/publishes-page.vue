@@ -104,7 +104,9 @@ onMounted(async () => {
               <span> · </span>
               <span>{{ user?.username }}</span>
               <span class="hidden md:block"> · </span>
-              <span class="hidden md:block">{{ $dayjs(item.created_at).fromNow() }}</span>
+              <span :title="$dayjs(item.created_at).format('LLL')" class="hidden md:block">
+                {{ $dayjs(item.created_at).fromNow() }}
+              </span>
             </div>
           </div>
         </div>
