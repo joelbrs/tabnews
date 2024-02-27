@@ -22,6 +22,19 @@ model User {
   created_at  DateTime @default(now())
   type        UserType @default(MEMBER)
   notify      Boolean  @default(false)
+  Post        Post[]
+}
+
+model Post {
+  id          String   @id @default(uuid())
+  title       String   @db.VarChar(255)
+  description String
+  created_at  DateTime @default(now())
+  updated_at  DateTime @updatedAt
+  creator_id  String
+  font        String?
+
+  creator User @relation(fields: [creator_id], references: [id])
 }
 
 enum UserType {
