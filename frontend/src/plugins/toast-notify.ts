@@ -8,7 +8,7 @@ const error = ({ response }: AxiosError) => {
     title: 'Oops! Algo deu errado.',
     description: (response?.data as any).message,
     duration: 1500,
-    class: 'h-20',
+    class: 'h-10',
     variant: 'destructive'
   })
 }
@@ -18,7 +18,7 @@ const ok = (msg?: string) => {
     title: 'Operação realizada com sucesso!',
     description: msg,
     duration: 1500,
-    class: 'text-white bg-green-400 h-24'
+    class: 'text-white bg-green-400 h-10'
   })
 }
 

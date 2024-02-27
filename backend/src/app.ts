@@ -4,6 +4,7 @@ import fastifyCors from "@fastify/cors";
 import fastifyCookie from "@fastify/cookie";
 import { UserRoutes } from "./presentations/routes/user-routes";
 import { env } from "./infra/utils/environments";
+import { PostRoutes } from "./presentations/routes/post-controller";
 
 export const app = fastify({ logger: true });
 
@@ -25,3 +26,4 @@ app.register(fastifyJwt, {
 
 /** Routes */
 app.register(UserRoutes, { prefix: "/users" });
+app.register(PostRoutes, { prefix: "/posts" });

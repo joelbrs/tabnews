@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import { useUserStore } from '@/stores/user'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -7,6 +8,36 @@ const router = createRouter({
       path: '',
       name: 'root-login',
       children: [
+        {
+          path: '/',
+          name: 'relevants',
+          component: () => import('../views/app/relevants/index-page.vue')
+        },
+        {
+          path: '/profile',
+          name: 'profile',
+          component: () => import('../views/app/user/user-profile.vue')
+        },
+        {
+          path: '/:username',
+          name: 'user-general-profile',
+          component: () => import('../views/app/user/index-page.vue')
+        },
+        {
+          path: '/:username/publishes',
+          name: 'user-contents',
+          component: () => import('../views/app/user/index-page.vue')
+        },
+        {
+          path: '/:username/comments',
+          name: 'user-comments',
+          component: () => import('../views/app/user/index-page.vue')
+        },
+        {
+          path: '/publish',
+          name: 'publish',
+          component: () => import('../views/app/publish/index-page.vue')
+        },
         {
           path: '/sign-in',
           name: 'sign-in',
@@ -18,9 +49,15 @@ const router = createRouter({
           component: () => import('../views/auth/sign-up.vue')
         }
       ],
-      component: () => import('../layouts/auth-layout.vue')
+      component: () => import('../layouts/main-layout.vue')
     }
   ]
+})
+
+router.beforeEach(async () => {
+  const $userStore = useUserStore()
+
+  await $userStore.getLoggedUser()
 })
 
 export default router

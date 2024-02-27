@@ -1,17 +1,14 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { UsersApi } from '@/services'
 import { Label } from '@/components/ui/label'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
-import { RouterLink, useRouter } from 'vue-router'
-import { useNotify } from '@/plugins/toast-notify'
+import { RouterLink } from 'vue-router'
 import { Checkbox } from '@/components/ui/checkbox'
-import { Separator } from '@/components/ui/separator'
 import InputPassword from '@/components/input-password.vue'
+import { useUserStore } from '@/stores/user'
 
-const $router = useRouter()
-const $notify = useNotify()
+const $userStore = useUserStore()
 
 const loading = ref(false)
 const form = ref({
@@ -23,13 +20,8 @@ const form = ref({
 
 const signUp = async () => {
   loading.value = true
-  const { error } = await UsersApi.signUp(form.value)
+  await $userStore.signUp(form.value)
   loading.value = false
-
-  if (error) return $notify.error(error)
-
-  $notify.ok()
-  await $router.push({ name: 'sign-in' })
 }
 </script>
 

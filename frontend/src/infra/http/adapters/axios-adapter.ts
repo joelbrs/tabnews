@@ -8,12 +8,20 @@ export default class AxiosAdapter implements HttpClient {
 
   constructor(private readonly _baseUrl?: string) {}
 
+  async get<T>(url: string, params?: Object) {
+    try {
+      const { data } = await this._client.get<T>(this.constructUrl(url), { params })
+      return setDataResponse<T>(data)
+    } catch (error) {
+      return setErrorResponse(error as AxiosError)
+    }
+  }
+
   async post<T>(url: string, body: Object) {
     try {
       const { data } = await this._client.post<T>(this.constructUrl(url), body)
       return setDataResponse<T>(data)
     } catch (error) {
-      console.log(error)
       return setErrorResponse(error as AxiosError)
     }
   }

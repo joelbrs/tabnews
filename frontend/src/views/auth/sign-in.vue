@@ -1,16 +1,14 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { UsersApi } from '@/services'
 import { Label } from '@/components/ui/label'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { RouterLink, useRouter } from 'vue-router'
-import { useNotify } from '@/plugins/toast-notify'
-import { Separator } from '@/components/ui/separator'
+import { useUserStore } from '@/stores/user'
 import InputPassword from '@/components/input-password.vue'
 
 const $router = useRouter()
-const $notify = useNotify()
+const $userStore = useUserStore()
 
 const loading = ref(false)
 const form = ref({
@@ -20,19 +18,16 @@ const form = ref({
 
 const signIn = async () => {
   loading.value = true
-  const { error } = await UsersApi.signIn(form.value)
+  await $userStore.signIn(form.value)
   loading.value = false
 
-  if (error) return $notify.error(error)
-
-  $notify.ok()
-  await $router.push({ name: 'sign-in' })
+  await $router.push({ name: 'relevants' })
 }
 </script>
 
 <template>
   <div class="flex flex-col items-center justify-center gap-9 py-14">
-    <form class="w-full p-2 lg:w-[30%]" @submit.prevent.stop="signIn">
+    <form class="w-full p-2 md:w-[30%]" @submit.prevent.stop="signIn">
       <h1 class="text-3xl font-bold mb-5">Login</h1>
 
       <div>
