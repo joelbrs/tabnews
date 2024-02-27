@@ -7,6 +7,7 @@ import { useNotify } from '@/plugins/toast-notify'
 import { Pagination } from '@/@types/generics/pagination'
 import PublishesPageSkeleton from './publishes-page-skeleton.vue'
 import PaginationField from '@/components/pagination-field.vue'
+import { $dayjs } from '@/lib/dayjs'
 
 interface Props {
   type: 'all' | 'user'
@@ -103,7 +104,7 @@ onMounted(async () => {
               <span> · </span>
               <span>{{ user?.username }}</span>
               <span class="hidden md:block"> · </span>
-              <span class="hidden md:block">há 24 segundos</span>
+              <span class="hidden md:block">{{ $dayjs(item.created_at).fromNow() }}</span>
             </div>
           </div>
         </div>

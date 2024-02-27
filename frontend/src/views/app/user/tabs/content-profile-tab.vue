@@ -4,6 +4,7 @@ import type { User } from '@/@types'
 import { useUserStore } from '@/stores/user'
 import { Button } from '@/components/ui/button'
 import InputQuillEditor from '@/components/input-quill-editor.vue'
+import { $dayjs } from '@/lib/dayjs'
 
 const $userStore = useUserStore()
 
