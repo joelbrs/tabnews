@@ -33,9 +33,10 @@ watch(
 </script>
 
 <template>
-  <Tabs v-model:model-value="currentTab" :default-value="tabs[0].id" class="w-[40%]">
+  <Tabs v-model:model-value="currentTab" :default-value="tabs[0].id" class="md:w-[40%] w-[90vw]">
     <TabsList class="grid w-full grid-cols-3">
       <TabsTrigger
+        class="md:block flex flex-col"
         @click="$router.push({ name: tab.to })"
         v-for="tab in tabs"
         :key="tab.id"

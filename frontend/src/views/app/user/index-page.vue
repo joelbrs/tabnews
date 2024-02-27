@@ -48,7 +48,7 @@ onMounted(async () => {
 
 <template>
   <div class="flex flex-col items-center pt-14 pb-3.5">
-    <div class="flex justify-between items-center w-[40%]">
+    <div class="flex justify-between items-center md:w-[40%] w-[90vw]">
       <h1 class="text-2xl font-bold mb-2">{{ user?.username }}</h1>
 
       <MenuActions v-if="tab === 'profile'">

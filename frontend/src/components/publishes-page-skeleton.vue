@@ -9,11 +9,11 @@ defineProps<{
 
 <template>
   <div>
-    <div class="flex flex-col items-center py-7">
+    <div class="flex flex-col md:items-center py-4 md:py-7">
       <div
         v-for="(_, i) in type === 'all' ? 30 : 5"
         :key="i"
-        class="flex items-start justify-start gap-2 pb-1"
+        class="flex items-start justify-start gap-2 pb-5 md:pb-3.5 pl-2.5"
       >
         <span><Skeleton class="w-6 h-6" /></span>
         <div class="flex flex-wrap md:min-w-[35vw] max-w-[65vw] flex-col">

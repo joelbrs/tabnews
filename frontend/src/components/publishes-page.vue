@@ -88,7 +88,7 @@ onMounted(async () => {
         <div
           v-for="(item, i) in publishs"
           :key="item.id"
-          class="flex items-start justify-start gap-2 pb-5 md:pb-3.5 pl-5"
+          class="flex items-start justify-start gap-2 pb-5 md:pb-3.5 pl-2.5"
         >
           <span class="font-medium">{{ i + 1 }}.</span>
           <div class="flex flex-wrap md:max-w-[65vw] flex-col">
@@ -102,8 +102,8 @@ onMounted(async () => {
               <span>comentário</span>
               <span> · </span>
               <span>{{ user?.username }}</span>
-              <span> · </span>
-              <span>há 24 segundos</span>
+              <span class="hidden md:block"> · </span>
+              <span class="hidden md:block">há 24 segundos</span>
             </div>
           </div>
         </div>
