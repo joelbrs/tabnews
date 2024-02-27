@@ -6,24 +6,39 @@ import { User, Plus, Loader2 } from 'lucide-vue-next'
 import { Button } from '@/components/ui/button'
 import { useNotify } from '@/plugins/toast-notify'
 import { useUserStore } from '@/stores/user'
+import PaginationField from '@/components/pagination-field.vue'
+import { Pagination } from '@/@types/generics/pagination'
 
 const $notify = useNotify()
 const $userStore = useUserStore()
 
 const loading = ref(false)
+const pagination = ref(new Pagination())
 
 const publishs = ref<PostDTOOut[]>()
 
 const user = computed(() => $userStore.user)
 
+const handlePagination = async ($event: number) => {
+  pagination.value.page = $event
+
+  await getUserPublishs()
+}
+
 const getUserPublishs = async () => {
   loading.value = true
-  const { data, error } = await PostApi.listUserPosts({})
+  const { data, error } = await PostApi.listUserPosts({
+    size: 5,
+    page: pagination.value.page
+  })
   loading.value = false
 
   if (error) return $notify.error(error)
 
-  publishs.value = data?.content
+  if (data) {
+    publishs.value = data?.content
+    pagination.value.totalPages = data?.totalPages
+  }
 }
 
 onMounted(async () => {
@@ -44,7 +59,7 @@ onMounted(async () => {
       >
         <span>{{ i + 1 }}.</span>
         <div class="flex flex-col">
-          <RouterLink to="/" class="font-medium">{{ item.title }}</RouterLink>
+          <RouterLink to="/" class="font-medium hover:underline">{{ item.title }}</RouterLink>
 
           <div class="flex items-center gap-1.5 text-xs text-muted-foreground">
             <span>0 tabcoin</span>
@@ -57,6 +72,7 @@ onMounted(async () => {
           </div>
         </div>
       </div>
+      <PaginationField @handle-pagination="handlePagination($event)" :pagination="pagination" />
     </div>
     <div v-else class="flex flex-col items-center justify-center pt-5 pb-10">
       <User class="w-10 h-10" />
