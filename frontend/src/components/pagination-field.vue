@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { Button } from './ui/button'
-import { Pagination } from '@/@types/generics/pagination'
 import { ChevronLeft, ChevronRight } from 'lucide-vue-next'
 import { computed } from 'vue'
 
@@ -8,13 +7,11 @@ interface Props {
   pagination?: any
 }
 
-const props = withDefaults(defineProps<Props>(), {
-  pagination: new Pagination()
-})
+const props = defineProps<Props>()
 
 const disabled = computed(() => ({
-  previous: props.pagination.page === 0,
-  next: props.pagination.page + 1 === props.pagination.totalPages
+  previous: !props.pagination || props.pagination.page === 0,
+  next: !props.pagination || props.pagination.page + 1 === props.pagination.totalPages
 }))
 </script>
 

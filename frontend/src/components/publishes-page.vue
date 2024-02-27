@@ -1,11 +1,12 @@
 <script setup lang="ts">
-import { computed, onMounted, ref } from 'vue'
 import { PostApi } from '@/services'
 import type { PostDTOOut } from '@/@types'
-import { useNotify } from '@/plugins/toast-notify'
 import { useUserStore } from '@/stores/user'
-import PaginationField from '@/components/pagination-field.vue'
+import { computed, onMounted, ref } from 'vue'
+import { useNotify } from '@/plugins/toast-notify'
 import { Pagination } from '@/@types/generics/pagination'
+import PublishesPageSkeleton from './publishes-page-skeleton.vue'
+import PaginationField from '@/components/pagination-field.vue'
 
 interface Props {
   type: 'all' | 'user'
@@ -78,8 +79,8 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div v-if="loading" class="flex items-center justify-center w-full h-[10vh] pt-5">
-    <Loader2 class="w-8 h-8 animate-spin" />
+  <div v-if="loading">
+    <PublishesPageSkeleton />
   </div>
   <div v-else>
     <div class="pt-7" v-if="publishs && publishs.length">
