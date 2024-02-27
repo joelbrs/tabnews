@@ -42,6 +42,7 @@ export default class UserService {
       username: z.string(),
       email: z.string().email(),
       password: z.string().min(6).max(10),
+      notify: z.boolean(),
       type: z.enum(["ADMIN", "MEMBER"]).default("MEMBER"),
     });
 
@@ -56,11 +57,13 @@ export default class UserService {
     const dataValidSchema = z.object({
       username: z.string(),
       description: z.string(),
+      notify: z.boolean(),
     });
 
-    const { id } = request.params as { id: string };
+    const { sub: id }: { sub: string } = await request.jwtVerify();
 
     const data = dataValidSchema.parse(request.body);
+
     const { username, description } = await this._userRepository.update(
       id,
       data

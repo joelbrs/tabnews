@@ -21,6 +21,7 @@ model User {
   password    String
   created_at  DateTime @default(now())
   type        UserType @default(MEMBER)
+  notify      Boolean  @default(false)
 }
 
 enum UserType {
