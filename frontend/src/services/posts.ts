@@ -5,6 +5,10 @@ import { HttpFactory } from '@/factories/http-factory'
 const base = 'posts'
 const httpClient = HttpFactory(base)
 
+export function listUserPosts(params: Object) {
+  return httpClient.get<PaginationResponseModel<PostDTOOut>>('user', params)
+}
+
 export function createPost(params: Object) {
   return httpClient.post<PostDTOOut>('', params)
 }

@@ -20,6 +20,7 @@ const tabs: Tab[] = [
   {
     id: 'profile',
     label: 'Perfil',
+    header: true,
     to: 'user-general-profile'
   },
   {
@@ -29,6 +30,7 @@ const tabs: Tab[] = [
   },
   {
     id: 'comments',
+    header: true,
     label: 'Comentários',
     to: 'user-comments'
   }

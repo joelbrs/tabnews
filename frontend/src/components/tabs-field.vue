@@ -9,6 +9,7 @@ export interface Tab {
   title?: string
   description?: string
   to?: string
+  header?: boolean
 }
 
 const $emits = defineEmits<{
@@ -45,7 +46,7 @@ watch(
     </TabsList>
     <TabsContent v-for="tab in tabs" :key="tab.id" :value="tab.id">
       <Card>
-        <CardHeader>
+        <CardHeader v-if="tab.header">
           <slot :name="`header-${tab.id}`" />
         </CardHeader>
         <CardContent>
