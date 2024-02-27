@@ -8,7 +8,7 @@ import { Separator } from '@/components/ui/separator'
     <Separator class="w-[64%] mb-8" />
 
     <footer class="flex flex-col justify-center gap-5 text-sm text-center px-10">
-      <div class="flex flex-wrap justify-center items-center gap-10">
+      <div class="flex flex-wrap justify-center items-center gap-5 md:gap-10">
         <RouterLink class="text-blue-600" :to="{ name: 'sign-in' }">Contato</RouterLink>
         <RouterLink class="text-blue-600" :to="{ name: 'sign-in' }">FAQ</RouterLink>
         <RouterLink class="text-blue-600" :to="{ name: 'sign-in' }">GitHub</RouterLink>

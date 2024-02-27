@@ -11,7 +11,12 @@ const router = createRouter({
         {
           path: '/',
           name: 'relevants',
-          component: () => import('../views/app/relevants/index-page.vue')
+          component: () => import('../views/app/publishes/relevants-publishes.vue')
+        },
+        {
+          path: '/recents',
+          name: 'recents',
+          component: () => import('../views/app/publishes/recents-publishes.vue')
         },
         {
           path: '/profile',
@@ -36,7 +41,7 @@ const router = createRouter({
         {
           path: '/publish',
           name: 'publish',
-          component: () => import('../views/app/publish/index-page.vue')
+          component: () => import('../views/app/publishes/create-publish.vue')
         },
         {
           path: '/sign-in',
