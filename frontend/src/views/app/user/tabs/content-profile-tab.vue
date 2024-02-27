@@ -27,9 +27,8 @@ const saveChanges = async () => {
 }
 
 const cancelChanges = async () => {
-  showQuill.value = false
   await $userStore.getLoggedUser()
-  key.value++
+  showQuill.value = false
 }
 
 watch(
@@ -54,10 +53,10 @@ watch(
         >
       </div>
       <InputQuillEditor
-        :key="key"
-        id="description"
-        :disabled="!showQuill"
         v-model="profile.description"
+        id="description"
+        :key="key"
+        :disabled="!showQuill"
       />
 
       <div v-if="showQuill" class="flex items-center gap-2 justify-end pt-2">

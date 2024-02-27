@@ -37,7 +37,6 @@ export const useUserStore = defineStore('user', {
     async updateProfile(form: Object) {
       const { error } = await UsersApi.updateUser(form)
 
-      console.log(error)
       if (error) return $notify.error(error)
 
       $notify.ok()
