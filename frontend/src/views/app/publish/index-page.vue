@@ -4,19 +4,45 @@ import { Label } from '@/components/ui/label'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import InputQuillEditor from '@/components/input-quill-editor.vue'
+import { PostApi } from '@/services'
+import { useNotify } from '@/plugins/toast-notify'
 
+const $notify = useNotify()
+
+const key = ref(0)
 const loading = ref(false)
 
 const form = ref({
   title: '',
-  content: '',
+  description: '',
   font: ''
 })
+
+const createPost = async () => {
+  loading.value = true
+  const { error } = await PostApi.createPost(form.value)
+  loading.value = false
+
+  if (error) return $notify.error(error)
+
+  $notify.ok()
+  clearForm()
+}
+
+const clearForm = () => {
+  form.value = {
+    title: '',
+    description: '',
+    font: ''
+  }
+
+  key.value++
+}
 </script>
 
 <template>
   <div class="flex flex-col items-center justify-center gap-9 pt-5">
-    <form class="w-full lg:py-2 p-2 md:w-[60%]" @submit.prevent.stop="">
+    <form class="w-full lg:py-2 p-2 md:w-[60%]" @submit.prevent.stop="createPost">
       <h1 class="text-3xl font-bold mb-5">Publicar Novo Conteúdo</h1>
 
       <div class="flex flex-col gap-2">
@@ -31,8 +57,13 @@ const form = ref({
         </div>
 
         <div>
-          <Label for="content">Corpo da Publicação *</Label>
-          <InputQuillEditor id="content" v-model:model-value="form.content" required />
+          <Label for="description">Corpo da Publicação *</Label>
+          <InputQuillEditor
+            :key="key"
+            id="description"
+            v-model:model-value="form.description"
+            required
+          />
         </div>
 
         <div>
@@ -50,7 +81,7 @@ const form = ref({
       </div>
 
       <div class="flex items-center justify-end gap-2 w-full">
-        <Button variant="ghost"> Cancelar</Button>
+        <Button @click.prevent.stop="$router.back()" variant="ghost"> Cancelar</Button>
         <Button
           type="submit"
           class="bg-green-700 hover:bg-green-800 text-white"
