@@ -9,7 +9,7 @@ interface Params<T> extends PaginationInputModel {
 export default function generatePaginatedResponse<T>(params: Params<T>) {
   const { data, page, size, count } = params;
 
-  const totalPages = Math.round(count / (size ?? DEFAULT_SIZE));
+  const totalPages = Math.ceil(count / (size ?? DEFAULT_SIZE));
 
   return {
     content: data,
