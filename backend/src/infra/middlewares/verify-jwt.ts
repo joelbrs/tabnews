@@ -5,7 +5,7 @@ export const VerifyJwt = async (
   reply: FastifyReply
 ) => {
   try {
-    await request.jwtVerify();
+    await request.jwtVerify({ onlyCookie: true });
   } catch (err) {
     return reply.status(401).send({ message: "Unauthorized" });
   }
