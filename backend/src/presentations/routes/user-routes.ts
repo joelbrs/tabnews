@@ -1,6 +1,7 @@
 import { FastifyInstance } from "fastify";
 import { UserFactory } from "../../domain/factories";
 import { VerifyJwt } from "../../infra/middlewares/verify-jwt";
+import { request } from "https";
 
 const factory = UserFactory();
 
@@ -11,6 +12,10 @@ export const UserRoutes = async (app: FastifyInstance) => {
 
   app.post("/auth", async (request, reply) => {
     return await factory.authenticate(request, reply);
+  });
+
+  app.post("/logout", { onRequest: VerifyJwt }, async (request, reply) => {
+    return await factory.logout(request, reply);
   });
 
   app.post("/", async (request, reply) => {

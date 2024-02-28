@@ -114,4 +114,8 @@ export default class UserService {
       throw err;
     }
   }
+
+  async logout(_: FastifyRequest, reply: FastifyReply) {
+    reply.clearCookie("token");
+  }
 }
