@@ -62,7 +62,7 @@ const router = createRouter({
 router.beforeEach(async (to) => {
   const $userStore = useUserStore()
 
-  if (to.name !== 'sign-in') {
+  if (to.name !== 'sign-in' && to.name !== 'sign-up') {
     await $userStore.getLoggedUser()
 
     if (to.name !== 'relevants' && to.name !== 'recents' && !$userStore.isLogged) {
