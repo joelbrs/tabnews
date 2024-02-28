@@ -75,18 +75,29 @@ export default class UserService {
     return { username, description, notify };
   }
 
-  async addTabCoins(id: string, tabcoins: number) {
+  async updateTabCoins({
+    id,
+    tabcoins,
+    type,
+  }: {
+    id: string;
+    tabcoins: number;
+    type: "sub" | "add";
+  }) {
     const user = await this._userRepository.findById(id);
 
     if (!user) {
       throw new Error("User does not exists!");
     }
 
-    console.log(user.tabcoins);
-    return await this._userRepository.updateTabCoins(
-      id,
-      user.tabcoins + tabcoins
-    );
+    const newTabcoins =
+      type === "add" ? user.tabcoins + tabcoins : user.tabcoins - tabcoins;
+
+    if (newTabcoins < 0) {
+      throw new Error("Tabcoins going to be under 0.");
+    }
+
+    return await this._userRepository.updateTabCoins(id, newTabcoins);
   }
 
   async authenticate(request: FastifyRequest, reply: FastifyReply) {

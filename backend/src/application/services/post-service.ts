@@ -51,6 +51,10 @@ export default class PostService {
 
     await this._postRepository.create({ ...data, creator_id });
 
-    await this._userService.addTabCoins(creator_id, 5);
+    await this._userService.updateTabCoins({
+      id: creator_id,
+      tabcoins: 5,
+      type: "add",
+    });
   }
 }
