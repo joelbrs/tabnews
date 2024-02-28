@@ -21,26 +21,31 @@ const router = createRouter({
         {
           path: '/profile',
           name: 'profile',
+          meta: { requiresAuth: true },
           component: () => import('../views/app/user/user-profile.vue')
         },
         {
           path: '/:username',
           name: 'user-general-profile',
+          meta: { requiresAuth: true },
           component: () => import('../views/app/user/index-page.vue')
         },
         {
           path: '/:username/publishes',
           name: 'user-contents',
+          meta: { requiresAuth: true },
           component: () => import('../views/app/user/index-page.vue')
         },
         {
           path: '/:username/comments',
           name: 'user-comments',
+          meta: { requiresAuth: true },
           component: () => import('../views/app/user/index-page.vue')
         },
         {
           path: '/publish',
           name: 'publish',
+          meta: { requiresAuth: true },
           component: () => import('../views/app/publishes/create-publish.vue')
         },
         {
@@ -65,12 +70,12 @@ router.beforeEach(async (to) => {
   if (to.name !== 'sign-in' && to.name !== 'sign-up') {
     await $userStore.getLoggedUser()
 
-    if (to.name !== 'relevants' && to.name !== 'recents' && !$userStore.isLogged) {
+    if (to.meta.requiresAuth && !$userStore.isLogged) {
       return { name: 'relevants' }
     }
   }
 
-  if (to.name === 'sign-in' && $userStore.isLogged) {
+  if ((to.name === 'sign-in' || to.name === 'sign-up') && $userStore.isLogged) {
     return { name: 'relevants' }
   }
 })
