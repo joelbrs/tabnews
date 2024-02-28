@@ -5,9 +5,13 @@ import {
   DEFAULT_PAGE,
   DEFAULT_SIZE,
 } from "../../infra/utils/constants/pagination";
+import UserService from "./user-service";
 
 export default class PostService {
-  constructor(private readonly _postRepository: PostRepository) {}
+  constructor(
+    private readonly _postRepository: PostRepository,
+    private readonly _userService: UserService
+  ) {}
 
   async getAll(request: FastifyRequest) {
     const { page, size } = request.query as {
@@ -45,6 +49,8 @@ export default class PostService {
     const data = bodySchema.parse(request.body);
     const { sub: creator_id }: { sub: string } = await request.jwtVerify();
 
-    return await this._postRepository.create({ ...data, creator_id });
+    await this._postRepository.create({ ...data, creator_id });
+
+    await this._userService.addTabCoins(creator_id, 5);
   }
 }

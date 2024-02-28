@@ -4,8 +4,10 @@ import { prisma } from "../../infra/utils/prisma";
 import UserController from "../../presentations/controllers/user-controller";
 
 export const UserFactory = () => {
-  const repository = new PrismaUserRepository(prisma);
-  const service = new UserService(repository);
+  return new UserController(FactoryUserService());
+};
 
-  return new UserController(service);
+export const FactoryUserService = () => {
+  const repository = new PrismaUserRepository(prisma);
+  return new UserService(repository);
 };

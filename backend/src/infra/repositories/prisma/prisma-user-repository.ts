@@ -16,6 +16,10 @@ export default class PrismaUserRepository implements UserRepository {
     return await this._client.user.update({ where: { id }, data });
   }
 
+  async updateTabCoins(id: string, tabcoins: number) {
+    await this._client.user.update({ where: { id }, data: { tabcoins } });
+  }
+
   async findByEmail(email: string) {
     return await this._client.user.findUnique({ where: { email } });
   }

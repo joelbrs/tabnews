@@ -10,6 +10,7 @@ interface LoggedUser {
   email: string;
   description: string | null;
   createdAt: Date;
+  tabcoins: number;
   notify: boolean;
 }
 
@@ -35,6 +36,7 @@ export default class UserService {
       description: data.description,
       notify: data.notify,
       createdAt: data.created_at,
+      tabcoins: data.tabcoins,
     };
   }
 
@@ -71,6 +73,20 @@ export default class UserService {
     );
 
     return { username, description, notify };
+  }
+
+  async addTabCoins(id: string, tabcoins: number) {
+    const user = await this._userRepository.findById(id);
+
+    if (!user) {
+      throw new Error("User does not exists!");
+    }
+
+    console.log(user.tabcoins);
+    return await this._userRepository.updateTabCoins(
+      id,
+      user.tabcoins + tabcoins
+    );
   }
 
   async authenticate(request: FastifyRequest, reply: FastifyReply) {
