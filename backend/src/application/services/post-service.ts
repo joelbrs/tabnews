@@ -57,4 +57,45 @@ export default class PostService {
       type: "add",
     });
   }
+
+  async findById(request: FastifyRequest) {
+    const { id } = request.params as { id: string };
+
+    const posts = await this._postRepository.findById(id);
+
+    if (!posts) {
+      throw new Error("Post does not exists!");
+    }
+    return posts;
+  }
+
+  async incrementTabCoins(request: FastifyRequest) {
+    const { id } = request.params as { id: string };
+    const posts = await this.findById(request);
+
+    const { sub: creator_id }: { sub: string } = await request.jwtVerify();
+
+    await this._postRepository.updateTabCoins(id, posts.tabcoins + 1);
+    await this._userService.updateTabCoins({
+      id: creator_id,
+      tabcoins: 1,
+      type: "add",
+    });
+  }
+
+  async decrementTabCoins(request: FastifyRequest) {
+    const { id } = request.params as { id: string };
+    const posts = await this.findById(request);
+
+    console.log(posts);
+
+    const { sub: creator_id }: { sub: string } = await request.jwtVerify();
+
+    await this._postRepository.updateTabCoins(id, posts.tabcoins - 1);
+    await this._userService.updateTabCoins({
+      id: creator_id,
+      tabcoins: 1,
+      type: "sub",
+    });
+  }
 }

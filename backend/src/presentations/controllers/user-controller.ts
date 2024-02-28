@@ -9,6 +9,11 @@ export default class UserController {
     return reply.status(200).send(user);
   }
 
+  async findById(request: FastifyRequest, reply: FastifyReply) {
+    const user = await this._userService.findById(request);
+    return reply.status(200).send(user);
+  }
+
   async create(request: FastifyRequest, reply: FastifyReply) {
     await this._userService.create(request);
     return reply.status(201).send();

@@ -24,6 +24,10 @@ export default class PrismaPostRepository implements PostRepository {
     return generatePaginatedResponse<Post[]>({ count, page, data, size });
   }
 
+  async findById(id: string) {
+    return await this._client.post.findUnique({ where: { id } });
+  }
+
   async getPostsByUser(creator_id: string, params: PaginationInputModel) {
     const { page, size } = params;
 
@@ -41,5 +45,9 @@ export default class PrismaPostRepository implements PostRepository {
 
   async create(data: Prisma.PostUncheckedCreateInput) {
     return await this._client.post.create({ data });
+  }
+
+  async updateTabCoins(id: string, tabcoins: number) {
+    await this._client.post.update({ where: { id }, data: { tabcoins } });
   }
 }

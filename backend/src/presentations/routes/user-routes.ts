@@ -7,22 +7,26 @@ const factory = UserFactory();
 
 export const UserRoutes = async (app: FastifyInstance) => {
   app.get("/logged", { onRequest: VerifyJwt }, async (request, reply) => {
-    return await factory.getLoggedUser(request, reply);
+    return factory.getLoggedUser(request, reply);
+  });
+
+  app.get("/:id", { onRequest: VerifyJwt }, async (request, reply) => {
+    return factory.findById(request, reply);
   });
 
   app.post("/auth", async (request, reply) => {
-    return await factory.authenticate(request, reply);
+    return factory.authenticate(request, reply);
   });
 
   app.post("/logout", { onRequest: VerifyJwt }, async (request, reply) => {
-    return await factory.logout(request, reply);
+    return factory.logout(request, reply);
   });
 
   app.post("/", async (request, reply) => {
-    return await factory.create(request, reply);
+    return factory.create(request, reply);
   });
 
   app.put("/", { onRequest: VerifyJwt }, async (request, reply) => {
-    return await factory.update(request, reply);
+    return factory.update(request, reply);
   });
 };
