@@ -59,10 +59,16 @@ const router = createRouter({
   ]
 })
 
-router.beforeEach(async () => {
+router.beforeEach(async (to) => {
   const $userStore = useUserStore()
 
-  await $userStore.getLoggedUser()
+  if (to.name !== 'sign-in') {
+    await $userStore.getLoggedUser()
+  }
+
+  if (to.name === 'sign-in' && $userStore.isLogged) {
+    return { name: 'relevants' }
+  }
 })
 
 export default router
