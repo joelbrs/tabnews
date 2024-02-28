@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, watch, onMounted, ref } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import { useUserStore } from '@/stores/user'
 import { Settings } from 'lucide-vue-next'
 import MenuActions from '@/components/menu-actions.vue'
@@ -20,6 +20,7 @@ const tabs: Tab[] = [
   {
     id: 'profile',
     label: 'Perfil',
+    header: true,
     to: 'user-general-profile'
   },
   {
@@ -29,6 +30,7 @@ const tabs: Tab[] = [
   },
   {
     id: 'comments',
+    header: true,
     label: 'Comentários',
     to: 'user-comments'
   }
@@ -46,18 +48,18 @@ onMounted(async () => {
 
 <template>
   <div class="flex flex-col items-center pt-14 pb-3.5">
-    <div class="flex justify-between items-center w-[44%]">
+    <div class="flex justify-between items-center md:w-[40%] w-[90vw]">
       <h1 class="text-2xl font-bold mb-2">{{ user?.username }}</h1>
 
-      <MenuActions>
-        <div @click="$router.push({ name: 'publish' })" class="flex items-center gap-1">
+      <MenuActions v-if="tab === 'profile'">
+        <div @click="$router.push({ name: 'profile' })" class="flex items-center gap-1">
           <Settings class="w-4 h-4" />
           Editar Perfil
         </div>
       </MenuActions>
     </div>
 
-    <Tabs :key="key" v-model:model-value="tab" :tabs="tabs">
+    <Tabs class="w-[30%]" :key="key" v-model:model-value="tab" :tabs="tabs">
       <template #header-profile>
         <HeaderProfileTab />
       </template>

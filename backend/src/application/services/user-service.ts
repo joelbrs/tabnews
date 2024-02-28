@@ -11,6 +11,7 @@ interface LoggedUser {
   email: string;
   description: string | null;
   createdAt: Date;
+  notify: boolean;
 }
 
 export default class UserService {
@@ -33,6 +34,7 @@ export default class UserService {
       username: data.username,
       email: data.email,
       description: data.description,
+      notify: data.notify,
       createdAt: data.created_at,
     };
   }
@@ -47,7 +49,7 @@ export default class UserService {
     });
 
     const data = dataValidSchema.parse(request.body);
-    return await this._userRepository.create({
+    await this._userRepository.create({
       ...data,
       password: generateHash(data.password),
     });
@@ -64,12 +66,12 @@ export default class UserService {
 
     const data = dataValidSchema.parse(request.body);
 
-    const { username, description } = await this._userRepository.update(
+    const { username, description, notify } = await this._userRepository.update(
       id,
       data
     );
 
-    return { username, description };
+    return { username, description, notify };
   }
 
   async authenticate(request: FastifyRequest, reply: FastifyReply) {

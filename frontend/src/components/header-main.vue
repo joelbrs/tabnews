@@ -2,6 +2,7 @@
 import { Plus } from 'lucide-vue-next'
 import InputSearch from './input-search.vue'
 import MenuUser from './menu-user.vue'
+import { RouterLink } from 'vue-router'
 </script>
 
 <template>
@@ -12,11 +13,21 @@ import MenuUser from './menu-user.vue'
           <img class="w-9 h-9" src="../assets/logo-white.svg" />
           <div class="flex items-center gap-5">
             <h3 class="hidden md:flex">TabNews</h3>
-            <div>Relevantes</div>
+            <RouterLink
+              :class="$route.name === 'relevants' ? 'underline underline-offset-4' : ''"
+              :to="{ name: 'relevants' }"
+            >
+              Relevantes
+            </RouterLink>
           </div>
         </div>
 
-        <div>Recentes</div>
+        <RouterLink
+          :class="$route.name === 'recents' ? 'underline underline-offset-4' : ''"
+          :to="{ name: 'recents' }"
+        >
+          Recentes
+        </RouterLink>
       </nav>
       <div class="flex items-center gap-3 md:gap-5">
         <InputSearch label="Pesquisar" />

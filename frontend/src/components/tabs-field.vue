@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { Card, CardContent, CardHeader } from '@/components/ui/card'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 
 export interface Tab {
@@ -9,6 +9,7 @@ export interface Tab {
   title?: string
   description?: string
   to?: string
+  header?: boolean
 }
 
 const $emits = defineEmits<{
@@ -32,9 +33,10 @@ watch(
 </script>
 
 <template>
-  <Tabs v-model:model-value="currentTab" :default-value="tabs[0].id" class="w-[44%]">
+  <Tabs v-model:model-value="currentTab" :default-value="tabs[0].id" class="md:w-[40%] w-[90vw]">
     <TabsList class="grid w-full grid-cols-3">
       <TabsTrigger
+        class="md:block flex flex-col"
         @click="$router.push({ name: tab.to })"
         v-for="tab in tabs"
         :key="tab.id"
@@ -45,7 +47,7 @@ watch(
     </TabsList>
     <TabsContent v-for="tab in tabs" :key="tab.id" :value="tab.id">
       <Card>
-        <CardHeader>
+        <CardHeader v-if="tab.header">
           <slot :name="`header-${tab.id}`" />
         </CardHeader>
         <CardContent>

@@ -2,14 +2,15 @@
 import { ref, watch } from 'vue'
 
 const $emits = defineEmits<{
-  (e: 'update:modelValue', value: string): void
+  (e: 'update:modelValue', value?: string): void
 }>()
 
-defineProps<{
+const props = defineProps<{
   disabled?: boolean
+  modelValue?: string
 }>()
 
-const quill = ref('')
+const quill = ref(props.modelValue)
 
 watch(
   () => quill.value,
@@ -27,7 +28,8 @@ watch(
       content-type="html"
       v-model:content="quill"
       theme="snow"
-      toolbar="essential"
+      :readOnly="disabled"
+      :toolbar="!disabled ? 'essential' : ['clean']"
     />
   </div>
 </template>

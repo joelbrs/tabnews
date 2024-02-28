@@ -15,3 +15,7 @@ export function signIn(params: Object) {
 export function signUp(params: Object) {
   return httpClient.post('', params)
 }
+
+export function updateUser(params: Object) {
+  return httpClient.update('', params)
+}

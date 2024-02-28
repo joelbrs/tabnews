@@ -6,7 +6,7 @@ const { toast } = useToast()
 const error = ({ response }: AxiosError) => {
   return toast({
     title: 'Oops! Algo deu errado.',
-    description: (response?.data as any).message,
+    description: (response?.data as any)?.message,
     duration: 1500,
     class: 'h-10',
     variant: 'destructive'
