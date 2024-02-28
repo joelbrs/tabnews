@@ -14,7 +14,7 @@ export const useUserStore = defineStore('user', {
     async getLoggedUser() {
       const { data, error } = await UsersApi.getLoggedUser()
 
-      if (error) return $notify.error(error)
+      if (error) return
 
       this.user = data
       this.isLogged = true
@@ -33,6 +33,14 @@ export const useUserStore = defineStore('user', {
       if (error) return $notify.error(error)
 
       $notify.ok()
+    },
+    async logout() {
+      const { error } = await UsersApi.logout()
+
+      if (error) return $notify.error(error)
+
+      this.user = null
+      this.isLogged = false
     },
     async updateProfile(form: Object) {
       const { error } = await UsersApi.updateUser(form)

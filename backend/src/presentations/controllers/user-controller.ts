@@ -21,6 +21,11 @@ export default class UserController {
 
   async authenticate(request: FastifyRequest, reply: FastifyReply) {
     await this._userService.authenticate(request, reply);
-    return reply.send(200).send();
+    return reply.status(204).send();
+  }
+
+  async logout(request: FastifyRequest, reply: FastifyReply) {
+    await this._userService.logout(request, reply);
+    return reply.status(204).send();
   }
 }

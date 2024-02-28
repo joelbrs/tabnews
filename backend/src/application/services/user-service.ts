@@ -3,7 +3,6 @@ import { FastifyReply, FastifyRequest } from "fastify";
 import UserRepository from "../../infra/repositories/user-repository";
 import { generateHash } from "../../infra/utils/hashs/generate-hash";
 import { compare } from "../../infra/utils/hashs/compare-hash";
-import { Prisma } from "@prisma/client";
 
 interface LoggedUser {
   id: string;
@@ -114,5 +113,9 @@ export default class UserService {
     } catch (err) {
       throw err;
     }
+  }
+
+  async logout(_: FastifyRequest, reply: FastifyReply) {
+    reply.clearCookie("token");
   }
 }

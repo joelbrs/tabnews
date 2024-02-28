@@ -18,10 +18,10 @@ const form = ref({
 
 const signIn = async () => {
   loading.value = true
-  await $userStore.signIn(form.value)
-  loading.value = false
-
-  await $router.push({ name: 'relevants' })
+  $userStore
+    .signIn(form.value)
+    .then(async () => await $router.push({ name: 'relevants' }))
+    .finally(() => (loading.value = false))
 }
 </script>
 

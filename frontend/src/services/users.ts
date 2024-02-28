@@ -9,13 +9,17 @@ export function getLoggedUser() {
 }
 
 export function signIn(params: Object) {
-  return httpClient.post('auth', params)
+  return httpClient.post<void>('auth', params)
 }
 
 export function signUp(params: Object) {
-  return httpClient.post('', params)
+  return httpClient.post<void>('', params)
+}
+
+export function logout() {
+  return httpClient.post<void>('logout')
 }
 
 export function updateUser(params: Object) {
-  return httpClient.update('', params)
+  return httpClient.update<void>('', params)
 }

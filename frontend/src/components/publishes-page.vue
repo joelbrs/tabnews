@@ -44,7 +44,7 @@ const getPublishes = async () => {
 
 const getAllPublishes = async () => {
   loading.value = true
-  const { data, error } = await PostApi.listUserPosts({
+  const { data, error } = await PostApi.listPosts({
     size: 30,
     page: pagination.value.page
   })
@@ -103,8 +103,8 @@ onMounted(async () => {
               <span>comentário</span>
               <span> · </span>
               <span>{{ user?.username }}</span>
-              <span class="hidden md:block"> · </span>
-              <span :title="$dayjs(item.created_at).format('LLL')" class="hidden md:block">
+              <span> · </span>
+              <span :title="$dayjs(item.created_at).format('LLL')">
                 {{ $dayjs(item.created_at).fromNow() }}
               </span>
             </div>

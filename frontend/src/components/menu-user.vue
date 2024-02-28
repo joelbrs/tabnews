@@ -19,6 +19,10 @@ const $userStore = useUserStore()
 const user = computed(() => {
   return $userStore.user
 })
+
+const logout = async () => {
+  $userStore.logout().then(async () => await $router.push({ name: 'relevants' }))
+}
 </script>
 
 <template>
@@ -65,6 +69,7 @@ const user = computed(() => {
       <DropdownMenuSeparator />
       <DropdownMenuGroup class="p-2">
         <DropdownMenuItem
+          @click="logout"
           class="text-red-600 data-[highlighted]:bg-red-50 dark:data-[highlighted]:bg-red-950 data-[highlighted]:text-red-600 hover:cursor-pointer"
         >
           <LogOut class="w-4 h-4 mr-2" />
