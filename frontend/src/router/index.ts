@@ -64,6 +64,10 @@ router.beforeEach(async (to) => {
 
   if (to.name !== 'sign-in') {
     await $userStore.getLoggedUser()
+
+    if (to.name !== 'relevants' && to.name !== 'recents' && !$userStore.isLogged) {
+      return { name: 'relevants' }
+    }
   }
 
   if (to.name === 'sign-in' && $userStore.isLogged) {

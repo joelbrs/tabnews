@@ -5,9 +5,11 @@ import FooterApp from '@/components/footer-app.vue'
 import { useUserStore } from '@/stores/user'
 import HeaderMain from '@/components/header-main.vue'
 import { verifyThemeSystem } from '@/plugins/theme-provider'
-import { onMounted } from 'vue'
+import { computed, onMounted } from 'vue'
 
 const $userStore = useUserStore()
+
+const user = computed(() => $userStore)
 
 onMounted(() => {
   verifyThemeSystem()
@@ -15,7 +17,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <HeaderLogin v-if="!$userStore.isLogged" />
+  <HeaderLogin v-if="!user.isLogged" />
   <HeaderMain v-else />
   <RouterView />
   <FooterApp />

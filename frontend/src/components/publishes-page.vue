@@ -44,7 +44,7 @@ const getPublishes = async () => {
 
 const getAllPublishes = async () => {
   loading.value = true
-  const { data, error } = await PostApi.listUserPosts({
+  const { data, error } = await PostApi.listPosts({
     size: 30,
     page: pagination.value.page
   })
