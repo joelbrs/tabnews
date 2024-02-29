@@ -13,6 +13,10 @@ interface Props {
   type: 'all' | 'user'
 }
 
+const $emits = defineEmits<{
+  (e: 'publishs-count', value: number): void
+}>()
+
 const props = defineProps<Props>()
 
 const $notify = useNotify()
@@ -21,6 +25,7 @@ const $userStore = useUserStore()
 const loading = ref(false)
 const pagination = ref(new Pagination())
 
+const totalPublishs = ref(0)
 const publishs = ref<PostDTOOut[]>()
 
 const user = computed(() => $userStore.user)
@@ -39,6 +44,7 @@ const getPublishes = async () => {
 
   if (props.type in routes) {
     await routes[props.type]()
+    $emits('publishs-count', totalPublishs.value)
   }
 }
 
@@ -55,6 +61,7 @@ const getAllPublishes = async () => {
   if (data) {
     publishs.value = data?.content
     pagination.value.totalPages = data?.totalPages
+    totalPublishs.value = data.totalElements
   }
 }
 
@@ -71,6 +78,7 @@ const getUserPublishes = async () => {
   if (data) {
     publishs.value = data?.content
     pagination.value.totalPages = data?.totalPages
+    totalPublishs.value = data.totalElements
   }
 }
 

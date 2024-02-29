@@ -7,6 +7,7 @@ export interface Tab {
   id: string
   label: string
   title?: string
+  badge?: number
   description?: string
   to?: string
   header?: boolean
@@ -36,13 +37,20 @@ watch(
   <Tabs v-model:model-value="currentTab" :default-value="tabs[0].id" class="md:w-[40%] w-[90vw]">
     <TabsList class="grid w-full grid-cols-3">
       <TabsTrigger
-        class="md:block flex flex-col"
+        class="flex gap-2 items-center"
         @click="$router.push({ name: tab.to })"
         v-for="tab in tabs"
         :key="tab.id"
         :value="tab.id"
       >
         {{ tab.label }}
+        <div
+          v-if="tab.badge !== undefined && currentTab === tab.id"
+          style="background-color: rgba(110, 118, 129, 0.4)"
+          class="px-1 rounded-full text-xs text-center"
+        >
+          {{ tab.badge }}
+        </div>
       </TabsTrigger>
     </TabsList>
     <TabsContent v-for="tab in tabs" :key="tab.id" :value="tab.id">

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, onMounted, ref } from 'vue'
+import { computed, onMounted, ref, watch } from 'vue'
 import { useUserStore } from '@/stores/user'
 import { Settings } from 'lucide-vue-next'
 import MenuActions from '@/components/menu-actions.vue'
@@ -16,7 +16,7 @@ const $userStore = useUserStore()
 const key = ref(0)
 const tab = ref('profile')
 
-const tabs: Tab[] = [
+const tabs = ref<Tab[]>([
   {
     id: 'profile',
     label: 'Perfil',
@@ -34,7 +34,7 @@ const tabs: Tab[] = [
     label: 'Comentários',
     to: 'user-comments'
   }
-]
+])
 
 const user = computed(() => $userStore.user)
 
@@ -69,7 +69,7 @@ onMounted(async () => {
       </template>
 
       <template #content-publishes>
-        <ContentPublishesTab />
+        <ContentPublishesTab @publishs-count="tabs[1].badge = $event" />
       </template>
 
       <template #content-comments>

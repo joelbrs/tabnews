@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button'
 </script>
 
 <template>
-  <PublishesPage type="user">
+  <PublishesPage @publishs-count="$emit('publishs-count', $event)" type="user">
     <template #not-found>
       <User class="w-10 h-10" />
       <h3 class="text-xl font-medium">Nenhuma publicação encontrada</h3>
