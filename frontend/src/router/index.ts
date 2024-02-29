@@ -31,6 +31,11 @@ const router = createRouter({
           component: () => import('../views/app/user/index-page.vue')
         },
         {
+          path: '/:username/:post',
+          name: 'detail-post',
+          component: () => import('../views/app/publishes/detail-post.vue')
+        },
+        {
           path: '/:username/publishes',
           name: 'user-contents',
           meta: { requiresAuth: true },
@@ -71,7 +76,7 @@ router.beforeEach(async (to) => {
     await $userStore.getLoggedUser()
 
     if (to.meta.requiresAuth && !$userStore.isLogged) {
-      return { name: 'relevants' }
+      return { name: 'sign-in' }
     }
   }
 

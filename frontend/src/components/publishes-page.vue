@@ -101,7 +101,11 @@ onMounted(async () => {
         >
           <span class="font-medium">{{ i + 1 }}.</span>
           <div class="flex flex-wrap md:max-w-[55vw] flex-col">
-            <RouterLink to="/" class="font-medium hover:underline">{{ item.title }}</RouterLink>
+            <RouterLink
+              :to="{ name: 'detail-post', params: { post: item.id, username: item.creator_name } }"
+              class="font-medium hover:underline"
+              >{{ item.title }}</RouterLink
+            >
 
             <div class="flex items-center gap-1.5 text-xs text-muted-foreground">
               <span>{{ item.tabcoins }}</span>

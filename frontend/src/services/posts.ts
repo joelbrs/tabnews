@@ -9,6 +9,10 @@ export function listUserPosts(id: string, params: Object) {
   return httpClient.get<PaginationResponseModel<PostDTOOut>>(`user/${id}`, params)
 }
 
+export function findPostById(id: string) {
+  return httpClient.get<PostDTOOut>(`${id}`)
+}
+
 export function createPost(params: Object) {
   return httpClient.post<PostDTOOut>('', params)
 }
