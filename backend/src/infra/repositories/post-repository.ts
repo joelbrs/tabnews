@@ -6,6 +6,8 @@ import {
 
 export default interface PostRepository {
   getAll(params: PaginationInputModel): Promise<PaginationModel<Post>>;
+  findById(id: string): Promise<Post | null>;
+  updateTabCoins(id: string, tabcoins: number): Promise<void>;
   getPostsByUser(
     creator_id: string,
     params: PaginationInputModel

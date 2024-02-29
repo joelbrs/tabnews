@@ -14,8 +14,29 @@ export default class PostController {
     return reply.status(200).send(posts);
   }
 
+  async findById(request: FastifyRequest, reply: FastifyReply) {
+    const post = await this._postService.findById(request);
+    return reply.status(200).send(post);
+  }
+
   async create(request: FastifyRequest, reply: FastifyReply) {
     const post = await this._postService.create(request);
     return reply.status(201).send(post);
+  }
+
+  async incrementTabCoins(
+    request: FastifyRequest,
+    reply: FastifyReply
+  ): Promise<void> {
+    await this._postService.incrementTabCoins(request);
+    return reply.status(204).send();
+  }
+
+  async decrementTabCoins(
+    request: FastifyRequest,
+    reply: FastifyReply
+  ): Promise<void> {
+    await this._postService.decrementTabCoins(request);
+    return reply.status(204).send();
   }
 }

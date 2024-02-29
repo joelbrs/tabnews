@@ -10,7 +10,14 @@ interface LoggedUser {
   email: string;
   description: string | null;
   createdAt: Date;
+  tabcoins: number;
   notify: boolean;
+}
+
+interface PropsTabCoins {
+  id: string;
+  tabcoins: number;
+  type: "sub" | "add";
 }
 
 export default class UserService {
@@ -35,7 +42,19 @@ export default class UserService {
       description: data.description,
       notify: data.notify,
       createdAt: data.created_at,
+      tabcoins: data.tabcoins,
     };
+  }
+
+  async findById(request: FastifyRequest) {
+    const { id } = request.params as { id: string };
+
+    const user = await this._userRepository.findById(id);
+
+    if (!user) {
+      throw new Error("User does not exists!");
+    }
+    return user;
   }
 
   async create(request: FastifyRequest) {
@@ -71,6 +90,23 @@ export default class UserService {
     );
 
     return { username, description, notify };
+  }
+
+  async updateTabCoins({ id, tabcoins, type }: PropsTabCoins) {
+    const user = await this._userRepository.findById(id);
+
+    if (!user) {
+      throw new Error("User does not exists!");
+    }
+
+    const newTabcoins =
+      type === "add" ? user.tabcoins + tabcoins : user.tabcoins - tabcoins;
+
+    if (newTabcoins < 0) {
+      throw new Error("Tabcoins going to be under 0.");
+    }
+
+    return await this._userRepository.updateTabCoins(id, newTabcoins);
   }
 
   async authenticate(request: FastifyRequest, reply: FastifyReply) {
