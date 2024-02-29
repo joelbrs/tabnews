@@ -7,7 +7,7 @@ export interface Tab {
   id: string
   label: string
   title?: string
-  badge?: number
+  badge?: number | string
   description?: string
   to?: string
   header?: boolean
@@ -47,7 +47,7 @@ watch(
         <div
           v-if="tab.badge !== undefined && currentTab === tab.id"
           style="background-color: rgba(110, 118, 129, 0.4)"
-          class="px-1 rounded-full text-xs text-center"
+          class="px-2 rounded-full text-xs text-center"
         >
           {{ tab.badge }}
         </div>
