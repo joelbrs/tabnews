@@ -17,7 +17,7 @@ model User {
   id          String   @id @default(uuid())
   username    String   @unique
   email       String   @unique
-  description String?  @db.VarChar(500)
+  description String?  @db.VarChar(5000)
   password    String
   created_at  DateTime @default(now())
   type        UserType @default(MEMBER)
@@ -31,7 +31,7 @@ model User {
 model Post {
   id          String   @id @default(uuid())
   title       String   @db.VarChar(255)
-  description String
+  description String   @db.VarChar(10000)
   created_at  DateTime @default(now())
   updated_at  DateTime @updatedAt
   creator_id  String
@@ -44,7 +44,7 @@ model Post {
 
 model Comment {
   id          String   @id @default(uuid())
-  description String   @db.VarChar(500)
+  description String   @db.VarChar(1000)
   created_at  DateTime @default(now())
   updated_at  DateTime @updatedAt
   tabcoins    Int      @default(1)

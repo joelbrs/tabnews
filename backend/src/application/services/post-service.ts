@@ -55,7 +55,7 @@ export default class PostService {
   async create(request: FastifyRequest) {
     const bodySchema = z.object({
       title: z.string().max(255),
-      description: z.string().max(500),
+      description: z.string().max(10000),
       font: z.string().url().nullable(),
     });
 

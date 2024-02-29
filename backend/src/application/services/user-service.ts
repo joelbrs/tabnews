@@ -76,7 +76,7 @@ export default class UserService {
   async update(request: FastifyRequest) {
     const dataValidSchema = z.object({
       username: z.string(),
-      description: z.string(),
+      description: z.string().max(5000),
       notify: z.boolean(),
     });
 

@@ -16,7 +16,7 @@ export default class CommentService {
 
   async create(request: FastifyRequest) {
     const bodySchema = z.object({
-      description: z.string().max(500),
+      description: z.string().max(100),
     });
 
     const { description } = bodySchema.parse(request.body);
@@ -29,7 +29,7 @@ export default class CommentService {
 
   async createSubComment(request: FastifyRequest) {
     const bodySchema = z.object({
-      description: z.string().max(500),
+      description: z.string().max(1000),
     });
 
     const { description } = bodySchema.parse(request.body);
