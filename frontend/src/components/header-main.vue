@@ -3,15 +3,21 @@ import { Plus } from 'lucide-vue-next'
 import InputSearch from './input-search.vue'
 import MenuUser from './menu-user.vue'
 import { RouterLink } from 'vue-router'
+import { useUserStore } from '@/stores/user'
+import { computed } from 'vue'
+
+const $userStore = useUserStore()
+
+const user = computed(() => $userStore.user)
 </script>
 
 <template>
   <header style="background-color: #161b22" class="p-3.5 text-white font-medium text-sm">
     <div class="flex justify-between items-center">
-      <nav class="flex items-center gap-2">
+      <nav class="flex items-center gap-5">
         <div class="flex items-center gap-2 hover:cursor-pointer hover:text-zinc-400">
           <img class="w-9 h-9" src="../assets/logo-white.svg" />
-          <div class="flex items-center md:gap-2 gap-5">
+          <div class="flex items-center gap-5">
             <h3 class="hidden md:flex">TabNews</h3>
             <RouterLink
               :class="$route.name === 'relevants' ? 'underline underline-offset-4' : ''"
@@ -42,7 +48,7 @@ import { RouterLink } from 'vue-router'
 
         <div class="flex items-center gap-1 text-xs font-medium">
           <div style="border-radius: 2px" title="TabCoins" class="bg-blue-700 w-2 h-2"></div>
-          0
+          {{ user?.tabcoins }}
         </div>
         <div class="flex items-center gap-1 text-xs font-medium">
           <div style="border-radius: 2px" title="TabCash" class="bg-green-700 w-2 h-2"></div>

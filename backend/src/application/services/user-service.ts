@@ -29,11 +29,7 @@ export default class UserService {
     if (!id) {
       throw new Error("User does'n exists.");
     }
-    const data = await this._userRepository.findById(id);
-
-    if (!data) {
-      throw new Error("User does'n exists.");
-    }
+    const data = await this.findById(id);
 
     return {
       id: data.id,
@@ -46,9 +42,13 @@ export default class UserService {
     };
   }
 
-  async findById(request: FastifyRequest) {
-    const { id } = request.params as { id: string };
+  async findByUsername(request: FastifyRequest) {
+    const { username } = request.params as { username: string };
 
+    return await this._userRepository.findByUsername(username);
+  }
+
+  async findById(id: string) {
     const user = await this._userRepository.findById(id);
 
     if (!user) {
@@ -93,11 +93,7 @@ export default class UserService {
   }
 
   async updateTabCoins({ id, tabcoins, type }: PropsTabCoins) {
-    const user = await this._userRepository.findById(id);
-
-    if (!user) {
-      throw new Error("User does not exists!");
-    }
+    const user = await this.findById(id);
 
     const newTabcoins =
       type === "add" ? user.tabcoins + tabcoins : user.tabcoins - tabcoins;

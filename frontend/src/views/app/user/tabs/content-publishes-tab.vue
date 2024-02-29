@@ -2,10 +2,15 @@
 import PublishesPage from '@/components/publishes-page.vue'
 import { User, Plus } from 'lucide-vue-next'
 import { Button } from '@/components/ui/button'
+import type { User as IUser } from '@/@types'
+
+defineProps<{
+  user?: IUser
+}>()
 </script>
 
 <template>
-  <PublishesPage type="user">
+  <PublishesPage :user="user" @publishs-count="$emit('publishs-count', $event)" type="user">
     <template #not-found>
       <User class="w-10 h-10" />
       <h3 class="text-xl font-medium">Nenhuma publicação encontrada</h3>

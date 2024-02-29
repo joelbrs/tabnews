@@ -19,10 +19,17 @@ export default class PostService {
       size: number | null;
     };
 
-    return await this._postRepository.getAll({
+    const posts = await this._postRepository.getAll({
       page: page ?? DEFAULT_PAGE,
       size: size ?? DEFAULT_SIZE,
     });
+
+    for (const post of posts.content) {
+      const creator = await this._userService.findById(post.creator_id);
+      post.creator_name = creator.username;
+    }
+
+    return posts;
   }
 
   async getPostsByUser(request: FastifyRequest) {
@@ -31,12 +38,18 @@ export default class PostService {
       size: number | null;
     };
 
-    const { sub }: { sub: string } = await request.jwtVerify();
+    const { id } = request.params as { id: string };
 
-    return await this._postRepository.getPostsByUser(sub, {
+    const posts = await this._postRepository.getPostsByUser(id, {
       page: page ?? DEFAULT_PAGE,
       size: size ?? DEFAULT_SIZE,
     });
+
+    for (const post of posts.content) {
+      const creator = await this._userService.findById(post.creator_id);
+      post.creator_name = creator.username;
+    }
+    return posts;
   }
 
   async create(request: FastifyRequest) {

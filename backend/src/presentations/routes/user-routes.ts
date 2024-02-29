@@ -10,8 +10,8 @@ export const UserRoutes = async (app: FastifyInstance) => {
     return factory.getLoggedUser(request, reply);
   });
 
-  app.get("/:id", { onRequest: VerifyJwt }, async (request, reply) => {
-    return factory.findById(request, reply);
+  app.get("/:username", { onRequest: VerifyJwt }, async (request, reply) => {
+    return factory.findByUsername(request, reply);
   });
 
   app.post("/auth", async (request, reply) => {

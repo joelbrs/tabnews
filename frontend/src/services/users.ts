@@ -8,6 +8,10 @@ export function getLoggedUser() {
   return httpClient.get<User>('logged')
 }
 
+export function getByUsername(username: string) {
+  return httpClient.get<User>(username)
+}
+
 export function signIn(params: Object) {
   return httpClient.post<void>('auth', params)
 }
@@ -21,5 +25,5 @@ export function logout() {
 }
 
 export function updateUser(params: Object) {
-  return httpClient.update<void>('', params)
+  return httpClient.put<void>('', params)
 }

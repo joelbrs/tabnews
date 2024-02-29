@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "generate": "npx prisma generate --schema ./src/infra/database/prisma/schema.prisma",
     "migrate": "npx prisma migrate dev --schema ./src/infra/database/prisma/schema.prisma",
     "dev": "tsx watch ./src/server.ts"
   },

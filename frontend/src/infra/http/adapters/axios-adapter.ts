@@ -26,9 +26,18 @@ export default class AxiosAdapter implements HttpClient {
     }
   }
 
-  async update<T>(url: string, body: Object) {
+  async put<T>(url: string, body: Object) {
     try {
       const { data } = await this._client.put<T>(this.constructUrl(url), body)
+      return setDataResponse<T>(data)
+    } catch (error) {
+      return setErrorResponse(error as AxiosError)
+    }
+  }
+
+  async patch<T>(url: string, body: Object) {
+    try {
+      const { data } = await this._client.patch<T>(this.constructUrl(url), body)
       return setDataResponse<T>(data)
     } catch (error) {
       return setErrorResponse(error as AxiosError)

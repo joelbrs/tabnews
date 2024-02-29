@@ -7,6 +7,7 @@ export interface Tab {
   id: string
   label: string
   title?: string
+  badge?: number | string
   description?: string
   to?: string
   header?: boolean
@@ -36,21 +37,28 @@ watch(
   <Tabs v-model:model-value="currentTab" :default-value="tabs[0].id" class="md:w-[40%] w-[90vw]">
     <TabsList class="grid w-full grid-cols-3">
       <TabsTrigger
-        class="md:block flex flex-col"
-        @click="$router.push({ name: tab.to })"
         v-for="tab in tabs"
+        class="flex gap-2 items-center"
+        @click="$router.push({ name: tab.to })"
         :key="tab.id"
         :value="tab.id"
       >
         {{ tab.label }}
+        <div
+          v-if="tab.badge && currentTab === tab.id"
+          style="background-color: rgba(110, 118, 129, 0.4)"
+          class="px-2 rounded-full text-xs text-center"
+        >
+          {{ tab.badge }}
+        </div>
       </TabsTrigger>
     </TabsList>
     <TabsContent v-for="tab in tabs" :key="tab.id" :value="tab.id">
-      <Card>
-        <CardHeader v-if="tab.header">
+      <Card class="border-none">
+        <CardHeader class="px-0" v-if="tab.header">
           <slot :name="`header-${tab.id}`" />
         </CardHeader>
-        <CardContent>
+        <CardContent class="p-0">
           <slot :name="`content-${tab.id}`" />
         </CardContent>
 

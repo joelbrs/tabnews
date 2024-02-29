@@ -5,5 +5,7 @@ export interface PostDTOOut {
   created_at: Date
   updated_at: Date
   creator_id: string
+  tabcoins: number
   font: string | null
+  creator_name: string
 }
