@@ -11,16 +11,22 @@ const key = ref(0)
 const loading = ref(false)
 const showQuill = ref(false)
 
-const profile = computed({
+const props = defineProps<{
+  user?: User
+}>()
+
+const loggedUser = computed({
   get(): User {
     return $userStore.user || ({} as User)
   },
   set() {}
 })
 
+const sameUser = computed(() => props.user?.id === loggedUser.value.id)
+
 const saveChanges = async () => {
   loading.value = true
-  await $userStore.updateProfile(profile.value)
+  await $userStore.updateProfile(loggedUser.value)
   loading.value = false
 
   showQuill.value = false
@@ -39,21 +45,18 @@ watch(
 
 <template>
   <div class="flex items-center justify-center w-full">
-    <form
-      v-if="profile?.description || showQuill"
-      @submit.prevent.stop="saveChanges"
-      class="w-full"
-    >
+    <form v-if="user?.description || showQuill" @submit.prevent.stop="saveChanges" class="w-full">
       <div class="flex items-center justify-between pb-2">
         <Label class="text-sm font-medium" for="description">Descrição</Label>
         <span
+          v-if="sameUser"
           @click.prevent.stop="showQuill = true"
           class="text-blue-700 text-sm font-medium hover:cursor-pointer"
           >Editar Descrição</span
         >
       </div>
       <InputQuillEditor
-        v-model="profile.description"
+        v-model="loggedUser.description"
         id="description"
         :key="key"
         :disabled="!showQuill"
@@ -67,7 +70,7 @@ watch(
       </div>
     </form>
 
-    <div v-if="!profile.description">
+    <div v-if="!loggedUser.description && sameUser">
       <Button @click.prevent.stop="showQuill = true" class="h-8"> Criar Descrição </Button>
     </div>
   </div>

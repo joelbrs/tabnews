@@ -8,6 +8,10 @@ export function getLoggedUser() {
   return httpClient.get<User>('logged')
 }
 
+export function getByUsername(username: string) {
+  return httpClient.get<User>(username)
+}
+
 export function signIn(params: Object) {
   return httpClient.post<void>('auth', params)
 }

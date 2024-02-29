@@ -7,4 +7,5 @@ export interface PostDTOOut {
   creator_id: string
   tabcoins: number
   font: string | null
+  creator_name: string
 }

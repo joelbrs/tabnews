@@ -1,16 +1,16 @@
 <script setup lang="ts">
+import { $dayjs } from '@/lib/dayjs'
+import { onMounted, ref } from 'vue'
 import { PostApi } from '@/services'
-import type { PostDTOOut } from '@/@types'
-import { useUserStore } from '@/stores/user'
-import { computed, onMounted, ref } from 'vue'
+import type { PostDTOOut, User } from '@/@types'
 import { useNotify } from '@/plugins/toast-notify'
 import { Pagination } from '@/@types/generics/pagination'
 import PublishesPageSkeleton from './publishes-page-skeleton.vue'
 import PaginationField from '@/components/pagination-field.vue'
-import { $dayjs } from '@/lib/dayjs'
 
 interface Props {
   type: 'all' | 'user'
+  user?: User
 }
 
 const $emits = defineEmits<{
@@ -20,15 +20,12 @@ const $emits = defineEmits<{
 const props = defineProps<Props>()
 
 const $notify = useNotify()
-const $userStore = useUserStore()
 
 const loading = ref(false)
 const pagination = ref(new Pagination())
 
 const totalPublishs = ref(0)
 const publishs = ref<PostDTOOut[]>()
-
-const user = computed(() => $userStore.user)
 
 const handlePagination = async ($event: number) => {
   pagination.value.page = $event
@@ -67,7 +64,7 @@ const getAllPublishes = async () => {
 
 const getUserPublishes = async () => {
   loading.value = true
-  const { data, error } = await PostApi.listUserPosts({
+  const { data, error } = await PostApi.listUserPosts(props.user?.id as string, {
     size: 5,
     page: pagination.value.page
   })
@@ -110,7 +107,14 @@ onMounted(async () => {
               <span>0</span>
               <span>comentário</span>
               <span> · </span>
-              <span>{{ user?.username }}</span>
+              <span>
+                <RouterLink
+                  class="hover:underline"
+                  :to="{ name: 'user-general-profile', params: { username: item.creator_name } }"
+                >
+                  {{ item?.creator_name }}
+                </RouterLink>
+              </span>
               <span> · </span>
               <span :title="$dayjs(item.created_at).format('LLL')">
                 {{ $dayjs(item.created_at).fromNow() }}
