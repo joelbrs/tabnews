@@ -44,7 +44,7 @@ watch(
 </script>
 
 <template>
-  <div class="flex items-center justify-center w-full">
+  <div class="flex flex-col items-center justify-center w-full">
     <form v-if="user?.description || showQuill" @submit.prevent.stop="saveChanges" class="w-full">
       <div class="flex items-center justify-between pb-2">
         <Label class="text-sm font-medium" for="description">Descrição</Label>
@@ -64,13 +64,17 @@ watch(
 
       <div v-if="showQuill" class="flex items-center gap-2 justify-end pt-2">
         <Button @click.prevent.stop="cancelChanges" variant="ghost"> Cancelar </Button>
-        <Button type="submit" class="h-8 bg-green-700 hover:bg-green-800 text-white">
+        <Button
+          :loading="loading"
+          :disabled="loading"
+          type="submit"
+          class="h-8 bg-green-700 hover:bg-green-800 text-white"
+        >
           Salvar
         </Button>
       </div>
     </form>
-
-    <div v-if="!loggedUser.description && sameUser">
+    <div v-if="!loggedUser.description && sameUser && !showQuill">
       <Button @click.prevent.stop="showQuill = true" class="h-8"> Criar Descrição </Button>
     </div>
   </div>

@@ -24,10 +24,10 @@ watch(
   <div>
     <QuillEditor
       v-bind="$attrs"
-      class="min-h-56 border"
+      :class="`min-h-56 border ${disabled ? 'rounded-md' : ''}`"
       content-type="html"
       v-model:content="quill"
-      theme="snow"
+      :theme="!disabled ? 'snow' : 'bubble'"
       :readOnly="disabled"
       :toolbar="!disabled ? 'essential' : ['clean']"
     />
