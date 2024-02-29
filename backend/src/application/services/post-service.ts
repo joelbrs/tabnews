@@ -38,9 +38,9 @@ export default class PostService {
       size: number | null;
     };
 
-    const { sub }: { sub: string } = await request.jwtVerify();
+    const { id } = request.params as { id: string };
 
-    const posts = await this._postRepository.getPostsByUser(sub, {
+    const posts = await this._postRepository.getPostsByUser(id, {
       page: page ?? DEFAULT_PAGE,
       size: size ?? DEFAULT_SIZE,
     });

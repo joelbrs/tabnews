@@ -9,7 +9,7 @@ export const PostRoutes = async (app: FastifyInstance) => {
     return factory.getAll(request, reply);
   });
 
-  app.get("/user", async (request, reply) => {
+  app.get("/user/:id", async (request, reply) => {
     return factory.getPostsByUser(request, reply);
   });
 
