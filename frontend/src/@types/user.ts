@@ -5,4 +5,5 @@ export interface User {
   description?: string
   createdAt: Date
   notify: boolean
+  tabcoins: number
 }

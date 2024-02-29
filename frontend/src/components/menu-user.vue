@@ -30,7 +30,7 @@ const logout = async () => {
     <DropdownMenuTrigger as-child>
       <Menu class="w-7 h-7 hover:cursor-pointer" />
     </DropdownMenuTrigger>
-    <DropdownMenuContent class="w-48 rounded-xl relative right-3">
+    <DropdownMenuContent class="w-48 rounded-xl md:relative md:right-3">
       <DropdownMenuItem>
         <div
           @click="

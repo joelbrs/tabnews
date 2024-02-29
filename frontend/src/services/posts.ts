@@ -16,3 +16,11 @@ export function createPost(params: Object) {
 export function listPosts(params: Object) {
   return httpClient.get<PaginationResponseModel<PostDTOOut>>('', params)
 }
+
+export function incrementPostTabCoins(id: string) {
+  return httpClient.patch<void>(`increment/${id}`)
+}
+
+export function decrementPostTabCoins(id: string) {
+  return httpClient.patch<void>(`decrement/${id}`)
+}

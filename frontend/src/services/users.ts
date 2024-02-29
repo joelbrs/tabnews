@@ -21,5 +21,5 @@ export function logout() {
 }
 
 export function updateUser(params: Object) {
-  return httpClient.update<void>('', params)
+  return httpClient.put<void>('', params)
 }

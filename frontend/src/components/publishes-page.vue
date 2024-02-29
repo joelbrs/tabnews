@@ -96,8 +96,8 @@ onMounted(async () => {
             <RouterLink to="/" class="font-medium hover:underline">{{ item.title }}</RouterLink>
 
             <div class="flex items-center gap-1.5 text-xs text-muted-foreground">
-              <span>0</span>
-              <span>tabcoin</span>
+              <span>{{ item.tabcoins }}</span>
+              <span>tabcoins</span>
               <span> · </span>
               <span>0</span>
               <span>comentário</span>
