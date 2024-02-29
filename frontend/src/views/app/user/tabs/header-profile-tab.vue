@@ -8,7 +8,7 @@ defineProps<{
 </script>
 
 <template>
-  <div class="flex items-start justify-center md:justify-start text-xs md:text-sm gap-5">
+  <div class="flex items-start flex-wrap md:justify-start text-xs md:text-sm gap-5">
     <div class="flex items-center gap-1 text-md">
       <div style="border-radius: 2px" title="TabCoins" class="bg-blue-700 w-2 h-2"></div>
       <span>{{ user?.tabcoins }}</span>
@@ -20,7 +20,7 @@ defineProps<{
       <span>TabCash</span>
     </div>
     <span :title="$dayjs(user?.createdAt).format('LLL')">
-      Membro {{ $dayjs(user?.createdAt).fromNow() }}
+      Membro há {{ $dayjs(user?.createdAt).fromNow() }}
     </span>
   </div>
 </template>

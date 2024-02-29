@@ -13,8 +13,8 @@ dayjs.tz.setDefault('America/Brasilia')
 dayjs.updateLocale('en', {
   relativeTime: {
     future: 'em %s',
-    past: 'há %s',
-    s: 'alguns seconds',
+    past: '%s',
+    s: 'alguns segundos',
     m: 'um minute',
     mm: '%d minutos',
     h: 'uma hora',

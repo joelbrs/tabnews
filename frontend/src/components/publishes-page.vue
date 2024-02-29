@@ -89,15 +89,18 @@ onMounted(async () => {
     <PublishesPageSkeleton :type="type" />
   </div>
   <div v-else>
-    <div class="flex flex-col md:items-center py-4 md:py-7" v-if="publishs && publishs.length">
+    <div
+      v-if="publishs && publishs.length"
+      class="flex flex-col items-center justify-center py-4 md:py-7"
+    >
       <div>
         <div
           v-for="(item, i) in publishs"
           :key="item.id"
-          class="flex items-start justify-start gap-2 pb-5 md:pb-3.5 pl-2.5"
+          class="flex items-start justify-start gap-2 pb-5 md:pb-3.5 md:pr-14"
         >
           <span class="font-medium">{{ i + 1 }}.</span>
-          <div class="flex flex-wrap md:max-w-[65vw] flex-col">
+          <div class="flex flex-wrap md:max-w-[55vw] flex-col">
             <RouterLink to="/" class="font-medium hover:underline">{{ item.title }}</RouterLink>
 
             <div class="flex items-center gap-1.5 text-xs text-muted-foreground">
@@ -117,7 +120,7 @@ onMounted(async () => {
               </span>
               <span> · </span>
               <span :title="$dayjs(item.created_at).format('LLL')">
-                {{ $dayjs(item.created_at).fromNow() }}
+                {{ $dayjs(item.created_at).fromNow() }} atrás
               </span>
             </div>
           </div>

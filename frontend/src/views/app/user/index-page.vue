@@ -75,7 +75,7 @@ onMounted(async () => {
       </MenuActions>
     </div>
 
-    <Tabs class="w-[30%]" :key="key" v-model:model-value="tab" :tabs="tabs">
+    <Tabs :key="key" v-model:model-value="tab" :tabs="tabs">
       <template #header-profile>
         <HeaderProfileTab :user="user" />
       </template>

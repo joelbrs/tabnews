@@ -54,11 +54,11 @@ watch(
       </TabsTrigger>
     </TabsList>
     <TabsContent v-for="tab in tabs" :key="tab.id" :value="tab.id">
-      <Card>
-        <CardHeader v-if="tab.header">
+      <Card class="border-none">
+        <CardHeader class="px-0" v-if="tab.header">
           <slot :name="`header-${tab.id}`" />
         </CardHeader>
-        <CardContent>
+        <CardContent class="p-0">
           <slot :name="`content-${tab.id}`" />
         </CardContent>
 
