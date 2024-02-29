@@ -37,15 +37,15 @@ watch(
   <Tabs v-model:model-value="currentTab" :default-value="tabs[0].id" class="md:w-[40%] w-[90vw]">
     <TabsList class="grid w-full grid-cols-3">
       <TabsTrigger
+        v-for="tab in tabs"
         class="flex gap-2 items-center"
         @click="$router.push({ name: tab.to })"
-        v-for="tab in tabs"
         :key="tab.id"
         :value="tab.id"
       >
         {{ tab.label }}
         <div
-          v-if="tab.badge !== undefined && currentTab === tab.id"
+          v-if="tab.badge && currentTab === tab.id"
           style="background-color: rgba(110, 118, 129, 0.4)"
           class="px-2 rounded-full text-xs text-center"
         >
